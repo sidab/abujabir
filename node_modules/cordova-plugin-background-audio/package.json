@@ -1,0 +1,64 @@
+{
+  "_from": "cordova-plugin-background-audio",
+  "_id": "cordova-plugin-background-audio@1.1.0",
+  "_inBundle": false,
+  "_integrity": "sha512-QDFuKhTRNGqzUV0c19Tv7DNYFrIkDUCBMQS6Pla95+2ksvgqoS1YlbZE0xO30kKKL36fHWAIGIIKJrczOwoxew==",
+  "_location": "/cordova-plugin-background-audio",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "cordova-plugin-background-audio",
+    "name": "cordova-plugin-background-audio",
+    "escapedName": "cordova-plugin-background-audio",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-background-audio/-/cordova-plugin-background-audio-1.1.0.tgz",
+  "_shasum": "086104a6cba1d8c0c164138d146e4c964c5ede27",
+  "_spec": "cordova-plugin-background-audio",
+  "_where": "/Users/umahan/Documents/GitHub/abujabir",
+  "author": {
+    "name": "Daniel Sogl"
+  },
+  "bugs": {
+    "url": "https://github.com/danielsogl/cordova-plugin-background-audio/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "com.danielsogl.cordova.backgroundaudio",
+    "platforms": [
+      "ios"
+    ]
+  },
+  "deprecated": false,
+  "description": "\n\t\tBackground Audio for iOS\n\n\t\tWhen included within a cordova/phonegap build then the application will support background audio for iOS\n\t\tout of the box. No further action is necessary.\n\n\t\tThis negates having to use location/other solutions that may not be accepted by Apple.\n\t",
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=4.0.0"
+    }
+  ],
+  "homepage": "https://github.com/danielsogl/cordova-plugin-background-audio#readme",
+  "keywords": [
+    "background-audio",
+    "background",
+    "audio",
+    "media",
+    "ios",
+    "ecosystem:cordova",
+    "cordova-ios"
+  ],
+  "license": "MIT",
+  "name": "cordova-plugin-background-audio",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielsogl/cordova-plugin-background-audio.git"
+  },
+  "version": "1.1.0"
+}
