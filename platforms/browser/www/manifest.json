@@ -1,0 +1,11 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "Единобожие - Вероубеждение",
+  "short_name": "Единобожие - Вероубеждение",
+  "version": "com.abujabir.ml",
+  "description": "Аудио лекции СаидАхмада Муцалаулского.",
+  "author": "Umakhan Magomedov",
+  "icons": [],
+  "start_url": "index.html"
+}

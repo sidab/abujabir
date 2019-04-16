@@ -1,0 +1,132 @@
+<template>
+
+    <div class="page">
+
+        <div class="page-content">
+
+            <div class="block-title-medium text-align-center text-color-white">Единобожие - Вероубеждение</div>
+
+            <div class="swiper-container swiper-books">
+
+                <div class="swiper-wrapper">
+
+                    {{#each books}}
+
+                    <div @click="book({{id}})" class="swiper-slide padding" style="background: url({{Фон}})">
+
+                        <div class="cover"></div>
+
+                        <div class="item-title text-color-white margin-bottom"><b>{{Название}}</b></div>
+                        <div class="item-author text-color-white">{{Автор}}</div>
+
+                    </div>
+
+                    {{/each}}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</template>
+
+<style scoped>
+
+    {{this}} .page-content {
+        background: url(img/bg3.jpg) no-repeat;
+        background-size: cover !important;
+    }
+
+    {{this}} .block-title-medium {
+                 margin-top: 50px;
+             }
+
+    {{this}} .swiper-books {
+                 margin: 0 auto;
+                 margin-top: 60px;
+             }
+
+    {{this}} .swiper-books .swiper-slide {
+                 width: 60%;
+                 max-width: 250px;
+                 background-size: cover !important;
+                 height: 250px;
+                 border-radius: 5px;
+             }
+
+    {{this}} .swiper-books .swiper-slide .item-title {
+                 font-size: 23px;
+             }
+
+    {{this}} .swiper-books .swiper-slide .item-author {
+                 font-size: 16px;
+             }
+
+    {{this}} .swiper-books .swiper-slide .cover {
+                 position: absolute;
+                 width: 100%;
+                 height: 100%;
+                 background: rgba(0, 0, 0, 0.50);
+                 z-index: 9;
+                 margin: -16px;
+                 border-radius: 5px;
+             }
+
+    {{this}} .swiper-books .swiper-slide .item-author, .swiper-books .swiper-slide .item-title {
+                 text-shadow: #000 1px 0px, black 1px 1px, black 0px 1px, black -1px 1px, black -1px 0px, black -1px -1px, black 0px -1px, black 1px -1px;
+                 position: relative;
+                 z-index: 99;
+             }
+
+    {{this}} .swiper-books img {
+                 width: 100%;
+             }
+
+</style>
+
+<script>
+
+    return {
+
+        data: function () {
+
+            return {
+                books: app.methods.books()
+            }
+
+        },
+        methods: {
+            book: function (id) {
+
+                app.views.current.router.navigate('/book/' + id);
+
+            }
+        },
+        on: {
+
+            pageInit: function() {
+
+                new Swiper('.swiper-container', {
+                    effect: 'coverflow',
+                    grabCursor: true,
+                    centeredSlides: true,
+                    slidesPerView: 'auto',
+                    coverflowEffect: {
+                        rotate: 30,
+                        stretch: -20,
+                        depth: 100,
+                        modifier: 1,
+                        slideShadows : true,
+                    }
+                });
+
+            }
+
+        }
+
+    }
+
+</script>

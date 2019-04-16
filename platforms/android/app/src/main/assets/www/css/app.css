@@ -1,0 +1,38 @@
+
+.player-small {
+    z-index: 9999;
+    font-size: 18px;
+    --f7-toolbar-height: 70px;
+}
+
+.player-small .row {
+    width: 100%;
+}
+
+.player-small .audio-title {
+    height: 70px;
+    line-height: 70px;
+}
+
+.player-small i {
+    font-size: 35px;
+    height: 70px;
+    line-height: 70px;
+}
+
+.player-big {
+    height: 330px;
+}
+
+.player-big .duration, .player-big .current-time {
+    width: 40px !important;
+}
+
+.player-big .audio-title {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.player-big .audio-controls i {
+    font-size: 40px;
+}
