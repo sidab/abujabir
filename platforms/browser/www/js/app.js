@@ -189,6 +189,12 @@ app.views.create('.view-main', {
     main: true
 });
 
+$$('*').on('click', function () {
+
+    $$('video')[0].play();
+
+});
+
 $audio = $$('audio');
 audio = $$('audio')[0];
 
