@@ -1,6 +1,6 @@
 routes = [
     {
-        path: '/books/',
+        path: '/books',
         componentUrl: 'pages/books/index.html'
     },
     {

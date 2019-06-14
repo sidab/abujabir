@@ -16,7 +16,7 @@
 
                 </div>
 
-                <div class="title">{{Название}}</div>
+                <div class="title">{{book.Название}}</div>
 
             </div>
 
@@ -28,26 +28,26 @@
 
                 <ul>
 
-                    {{#each Аудио}}
+                    {{#each book.Аудио}}
 
-                    <li onclick="app.methods.player.play({{../id}}, {{@index}})">
+                        <li @click="play({{@index}})">
 
-                        <div class="item-content">
+                            <div class="item-content">
 
-                            <div class="item-media">
-                                <i class="icon material-icons">play_arrow</i>
+                                <div class="item-media">
+                                    <i class="icon material-icons">play_arrow</i>
+                                </div>
+
+                                <div class="item-inner">
+
+                                    <div class="item-title">{{Название}}</div>
+                                    <div class="item-after">{{Длительность}}</div>
+
+                                </div>
+
                             </div>
 
-                            <div class="item-inner">
-
-                                <div class="item-title">{{Название}}</div>
-                                <div class="item-after">{{Длительность}}</div>
-
-                            </div>
-
-                        </div>
-
-                    </li>
+                        </li>
 
                     {{/each}}
 
@@ -77,13 +77,21 @@
 
         data: function () {
 
-            id = this.$route.params.id;
+            var id = this.$route.params.id;
 
-            return app.methods.books(id);
+            return {
+                book: app.methods.books(id)
+            };
 
         },
         methods: {
+            play: function (index) {
 
+                var component = this;
+
+                app.methods.player.play(component.book, index);
+
+            }
         },
         on: {
 

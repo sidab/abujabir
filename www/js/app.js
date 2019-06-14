@@ -1,130 +1,28 @@
 var $$ = Dom7;
 
+var audioElDom7 = $$('audio');
+var audioEl = audioElDom7[0];
+
 var app = new Framework7({
     root: '#app',
-    name: 'Единобожие - Вероубеждение',
-    theme: 'md',
-    version: 1.4,
-    audioVersion: 1.0,
+    name: 'Абу Джабир',
+    theme: 'auto',
+    version: 1.5,
     routes: routes,
     touch: {
-        mdTouchRipple: false
+        mdTouchRipple: false,
+        tapHold: false,
+        disableContextMenu: true,
+        activeState: false,
+        fastClicks: true
     },
     view: {
-        stackPages: true,
-        animate: false
+        mdSwipeBack: true,
+        animate: false,
+        iosDynamicNavbar: false,
+        stackPages: true
     },
     methods: {
-        player: {
-            play: function (bookId, index, autoplay1, time1) {
-
-                player = this;
-
-                if(autoplay1 === undefined){
-                    autoplay = true;
-                } else {
-                    autoplay = autoplay1;
-                }
-
-                if(time1 === undefined){
-                    time = 0;
-                } else {
-                    time = time1;
-                }
-
-                book = app.methods.books(bookId);
-                audioInfo = book.Аудио[index];
-
-                audioInfo.index = index;
-                audioInfo.book = bookId;
-
-                localStorage.latestAudio = JSON.stringify(audioInfo);
-
-                dialogProgress = app.dialog.progress('Загрузка', 0);
-
-                setTimeout(function () {
-
-                    localforage.getItem(audioInfo.Ссылка, function (err, value) {
-
-                        if (value == null || app.params.audioVersion !== Number(localStorage.audioVersion)) {
-
-                            request = app.request({
-                                url: encodeURI('https://abujabir.ru/' + audioInfo.Ссылка),
-                                xhrFields: {
-                                    responseType: 'blob'
-                                },
-                                success: function (blob) {
-
-                                    blobURL = window.URL.createObjectURL(blob);
-
-                                    localforage.setItem(audioInfo.Ссылка, blob);
-
-                                    localStorage.audioVersion = app.params.audioVersion;
-
-                                    app.emit('audio:load');
-
-                                }
-                            });
-
-                            request.addEventListener('progress', function (progress) {
-
-                                progress = (progress.loaded / progress.total) * 100
-
-                                dialogProgress.setProgress(progress);
-                                dialogProgress.setText(progress.toFixed(0) + '% из 100%');
-
-                            }, false);
-
-                        } else {
-
-                            blobURL = window.URL.createObjectURL(value);
-
-                            app.emit('audio:load');
-
-                        }
-
-                    });
-
-                });
-
-            },
-            next: function () {
-
-                latestAudio = JSON.parse(localStorage.latestAudio);
-                nextAudio = book.Аудио[+ latestAudio.index + 1];
-
-                app.actions.close();
-
-                if (nextAudio !== undefined) {
-
-                    this.play(book.id, + latestAudio.index + 1);
-
-                } else {
-
-                    this.play(book.id, 0);
-
-                }
-
-            },
-            prev: function () {
-
-                latestAudio = JSON.parse(localStorage.latestAudio);
-                prevAudio = book.Аудио[+ latestAudio.index - 1];
-
-                app.actions.close();
-
-                if (prevAudio !== undefined) {
-
-                    this.play(book.id, + latestAudio.index - 1);
-
-                } else {
-
-                    this.play(book.id, + book.Аудио.length - 1);
-
-                }
-
-            }
-        },
         books: function (id) {
 
             if (localStorage.books == undefined) {
@@ -142,11 +40,11 @@ var app = new Framework7({
 
             }
 
-            books = JSON.parse(localStorage.books);
+            var books = JSON.parse(localStorage.books);
 
             if (id) {
 
-                book = books.filter(function (book) {
+                var book = books.filter(function (book) {
 
                     return book.id == id;
 
@@ -160,252 +58,147 @@ var app = new Framework7({
 
             }
 
+        },
+        player: {
+            play: function (book, index) {
+
+                var audio = book.Аудио[index];
+
+                localStorage.latest = JSON.stringify({
+                    book: book,
+                    index: index,
+                    audio: audio
+                });
+
+                if (app !== undefined) {
+
+                    app.dialog.preloader('Загрузка...');
+
+                }
+
+                localforage.getItem(audio.Ссылка).then(function(value) {
+
+                    var src;
+
+                    if (value !== null) {
+
+                        src = URL.createObjectURL(value);
+
+                    } else {
+
+                        src = 'https://abujabir.ru/' + audio.Ссылка;
+
+                    }
+
+                    audioElDom7.attr('src', src);
+
+                    audioEl.load();
+
+                });
+
+            },
+            next: function () {
+
+                var latest = JSON.parse(localStorage.latest);
+
+                var nextAudio = latest.book.Аудио[+ latest.index + 1];
+
+                if (nextAudio !== undefined) {
+
+                    this.play(latest.book, + latest.index + 1);
+
+                } else {
+
+                    this.play(latest.book, 0);
+
+                }
+
+            },
+            prev: function () {
+
+                var latest = JSON.parse(localStorage.latest);
+
+                var nextAudio = latest.book.Аудио[+ latest.index - 1];
+
+                if (nextAudio !== undefined) {
+
+                    this.play(latest.book, + latest.index - 1);
+
+                } else {
+
+                    this.play(latest.book, 0);
+
+                }
+
+            }
+        }
+    },
+    on: {
+        init: function () {
+
+            var app = this;
+
+            var sheetPlayer = app.sheet.create({
+                el: '.sheet-player',
+                swipeToClose: true,
+                backdrop: true,
+            });
+
+            var audioRange = app.range.create({
+                el: sheetPlayer.$el.find('.range-audio'),
+                label: false,
+                min: 0,
+                on: {
+                    change: function (range, value) {
+
+                        if (change) {
+
+                            audioEl.currentTime = value;
+
+                        }
+
+                    }
+                }
+            });
+
+            firstPlay = false;
+            latestTime = 0;
+
+            if (localStorage.latest !== undefined) {
+
+                firstPlay = true;
+
+                var latest = JSON.parse(localStorage.latest);
+
+                latestTime = latest.time;
+
+                app.methods.player.play(latest.book, latest.index);
+
+            }
+
         }
     }
 }).init();
 
 app.request.setup({
-    complete(xhr) {
-        console.log(xhr);
+    beforeSend: function(xhr) {
+
     },
-    error: function () {
-        app.dialog.alert('Проверьте подключение к интернету!', 'Ошибка подлкючения!');
+    complete: function(xhr) {
+
+        //console.log(xhr);
+
     }
 });
 
-if (app.version !== Number(localStorage.version)) {
-
-    localStorage.clear();
-    localforage.clear();
-
-    localStorage.version = app.version;
-
-    location.reload();
-
-}
-
 app.views.create('.view-main', {
-    url: '/books/',
+    url: '/books',
     main: true
 });
 
-$$('*').on('click', function () {
-
-    $$('video')[0].play();
-
-});
-
-$audio = $$('audio');
-audio = $$('audio')[0];
-
-if (localStorage.latestAudio !== undefined) {
-
-    latestAudio = JSON.parse(localStorage.latestAudio);
-
-    app.methods.player.play(latestAudio.book, latestAudio.index, false, latestAudio.time);
-
-}
-
-app.on('audio:load', function () {
-
-    $audio.attr('src', blobURL);
-
-    audio.load();
-
-});
-
-$audio.on('loadeddata', function () {
-
-    audio.currentTime = time;
-
-    if (autoplay) {
-
-        audio.play();
-
-    }
-
-    playerSmall = $$('.player-small');
-
-    playerSmall.removeClass('display-none');
-    playerSmall.find('.audio-title').html(audioInfo.Название);
-
-    playerBig = $$('.player-big');
-
-    playerBig.find('.audio-title').html(book.Название + ' - ' + audioInfo.Название);
-    playerBig.find('.audio-author').html(book.Автор);
-
-    audioRange = app.range.create({
-        el: playerBig.find('.audio-range'),
-        label: false,
-        value: time,
-        min: 0,
-        max: audio.duration.toFixed(0),
-        on: {
-            change: function (range, value) {
-
-                if (change) {
-
-                    audio.currentTime = value;
-
-                }
-
-            }
-        }
-    });
-
-    audioRange.max = audio.duration.toFixed(0);
-    audioRange.updateScale();
-
-    if (!app.device.ios) {
-
-        volumeRange = app.range.create({
-            el: playerBig.find('.volume-range'),
-            value: audio.volume,
-            min: 0.0,
-            step: 0.000001,
-            max: 1,
-            on: {
-                change: function (range, value) {
-
-                    audio.volume = value;
-
-                }
-            }
-        });
-
-    } else {
-
-        $$('.audio-volume').addClass('display-none');
-        $$('.player-big').css('height', '250px');
-
-    }
-
-    durationMinutes = Math.floor(audio.duration / 60).toLocaleString('en-US', {
-        minimumIntegerDigits: 2,
-        useGrouping: false
-    });
-
-    durationSeconds = (Math.floor(audio.duration) - durationMinutes * 60).toLocaleString('en-US', {
-        minimumIntegerDigits: 2,
-        useGrouping: false
-    });
-
-    duration = durationMinutes + ':' + durationSeconds;
-
-    playerBig.find('.duration').html(duration);
-
-    app.actions.open('.player-big');
-
-    setTimeout(function () {
-
-        dialogProgress.close();
-
-    });
-
-});
-
-$$('.pause').on('click', function() {
-
-    audio.pause();
-
-});
-
-$$('.resume').on('click', function() {
-
-    audio.play();
-
-});
-
-$$(audio).on('pause', function () {
-
-    playerSmall.find('.resume').removeClass('display-none');
-    playerSmall.find('.pause').addClass('display-none');
-
-    playerBig.find('.resume').removeClass('display-none');
-    playerBig.find('.pause').addClass('display-none');
-
-});
-
-$$(audio).on('playing', function () {
-
-    playerSmall.find('.resume').addClass('display-none');
-    playerSmall.find('.pause').removeClass('display-none');
-
-    playerBig.find('.resume').addClass('display-none');
-    playerBig.find('.pause').removeClass('display-none');
-
-});
-
-$$(audio).on('timeupdate', function () {
-
-    latestAudio = JSON.parse(localStorage.latestAudio);
-    latestAudio.time = audio.currentTime;
-
-    localStorage.latestAudio = JSON.stringify(latestAudio);
-
-    change = false;
-
-    if (typeof audioRange !== 'undefined') {
-
-        audioRange.setValue(audio.currentTime);
-
-    }
-
-    change = true;
-
-    currentTimeMinutes = Math.floor(audio.currentTime / 60).toLocaleString('en-US', {
-        minimumIntegerDigits: 2,
-        useGrouping: false
-    });
-
-    currentTimeSeconds = (Math.floor(audio.currentTime) - currentTimeMinutes * 60).toLocaleString('en-US', {
-        minimumIntegerDigits: 2,
-        useGrouping: false
-    });
-
-    currentTime = currentTimeMinutes + ':' + currentTimeSeconds;
-
-    if (typeof playerBig !== 'undefined') {
-
-        playerBig.find('.current-time').html(currentTime);
-
-    }
-
-});
-
-$$(audio).on('ended', function () {
-
-    player.next();
-
-});
-
-viewUrls = [];
-
-for (var i = 0; i < app.views.length; i++) {
-    viewUrls.push(app.views[i].params.url);
-}
-
-$$(document).on('backbutton', function() {
-
-    app.preloader.hide();
-
-    path = app.views.current.router.currentRoute.path;
-
-    if (viewUrls.indexOf(path) !== -1) {
-
-        app.dialog.confirm('Вы уверены что хотите закрыть приложение?', function() {
-
-            navigator.app.exitApp();
-
-        });
-
-    } else {
-
-        app.view.current.router.back();
-
-    }
-
-});
+var audioRange = app.range.get('.range-audio');
+var sheetPlayer = app.sheet.get('.sheet-player');
+var toolbarPlayer = $$('.toolbar-player');
 
 $$(document).on('deviceready', function () {
 
@@ -414,5 +207,175 @@ $$(document).on('deviceready', function () {
         navigator.splashscreen.hide();
 
     }, 500);
+
+    viewUrls = [];
+
+    for (var i = 0; i < app.views.length; i++) {
+        viewUrls.push(app.views[i].params.url);
+    }
+
+    $$(document).on('backbutton', function () {
+
+        app.preloader.hide();
+
+        path = app.views.current.router.currentRoute.path;
+
+        if (viewUrls.indexOf(path) !== -1) {
+
+            if (app.views.current.selector === '.view-main') {
+
+                if (app.dialog.get('.dialog') == undefined) {
+
+                    var confirmExit = app.dialog.confirm('Вы уверены что хотите закрыть приложение?', function () {
+
+                        navigator.app.exitApp();
+
+                    });
+
+                } else {
+
+                    navigator.app.exitApp();
+
+                }
+
+            } else {
+
+                $$('.toolbar-menu').find('a[href="#view-projects"]').click();
+
+            }
+
+        } else {
+
+            app.view.current.router.back();
+
+        }
+
+    });
+
+});
+
+audioElDom7.on('loadedmetadata', function () {
+
+    var latest = JSON.parse(localStorage.latest);
+
+    sheetPlayer.$el.find('.audio-title').html(latest.book.Название + ' - ' + latest.audio.Название);
+    sheetPlayer.$el.find('.audio-author').html(latest.book.Автор);
+
+    toolbarPlayer.removeClass('display-none');
+    toolbarPlayer.find('.audio-title').html(latest.audio.Название);
+
+    audioRange.max = audioEl.duration.toFixed(0);
+
+    var durationMinutes = Math.floor(audioEl.duration / 60).toLocaleString('en-US', {
+        minimumIntegerDigits: 2,
+        useGrouping: false
+    });
+
+    var durationSeconds = (Math.floor(audioEl.duration) - durationMinutes * 60).toLocaleString('en-US', {
+        minimumIntegerDigits: 2,
+        useGrouping: false
+    });
+
+    var duration = durationMinutes + ':' + durationSeconds;
+
+    sheetPlayer.$el.find('.duration').html(duration);
+
+    sheetPlayer.open();
+
+    audioElDom7.once('canplaythrough', function () {
+
+        app.dialog.close();
+
+        if (firstPlay && localStorage.latest !== undefined) {
+
+            setTimeout(function () {
+                audioEl.currentTime = latestTime;
+            })
+
+            firstPlay = false;
+
+        } else {
+
+            audioEl.play();
+
+        }
+
+    });
+
+});
+
+audioElDom7.on('loadeddata', function () {
+
+    var latest = JSON.parse(localStorage.latest);
+
+    app.request({
+        url: encodeURI('https://abujabir.ru/' + latest.audio.Ссылка),
+        xhrFields: {
+            responseType: 'blob'
+        },
+        success: function (blob) {
+
+            var blobURL = window.URL.createObjectURL(blob);
+
+            localforage.setItem(latest.audio.Ссылка, blob);
+
+        }
+    });
+
+});
+
+audioElDom7.on('timeupdate', function () {
+
+    var latest = JSON.parse(localStorage.latest);
+
+    var currentTimeMinutes = Math.floor(audioEl.currentTime / 60).toLocaleString('en-US', {
+        minimumIntegerDigits: 2,
+        useGrouping: false
+    });
+
+    var currentTimeSeconds = (Math.floor(audioEl.currentTime) - currentTimeMinutes * 60).toLocaleString('en-US', {
+        minimumIntegerDigits: 2,
+        useGrouping: false
+    });
+
+    var currentTime = currentTimeMinutes + ':' + currentTimeSeconds;
+
+    sheetPlayer.$el.find('.current-time').html(currentTime);
+
+    change = false;
+
+    latest.time = audioEl.currentTime;
+
+    localStorage.latest = JSON.stringify(latest);
+
+    audioRange.setValue(audioEl.currentTime);
+
+    change = true;
+
+});
+
+audioElDom7.on('playing', function () {
+
+    sheetPlayer.$el.find('.resume').addClass('display-none');
+    sheetPlayer.$el.find('.pause').removeClass('display-none');
+
+    toolbarPlayer.find('.resume').addClass('display-none');
+    toolbarPlayer.find('.pause').removeClass('display-none');
+
+});
+
+audioElDom7.on('pause', function () {
+
+    sheetPlayer.$el.find('.resume').removeClass('display-none');
+    sheetPlayer.$el.find('.pause').addClass('display-none');
+
+    toolbarPlayer.find('.resume').removeClass('display-none');
+    toolbarPlayer.find('.pause').addClass('display-none');
+
+});
+
+audioElDom7.on('ended', function () {
+
+    app.methods.player.next();
 
 });

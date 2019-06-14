@@ -12,14 +12,14 @@
 
                     {{#each books}}
 
-                    <div @click="book({{id}})" class="swiper-slide padding" style="background: url({{Фон}})">
+                        <div @click="book({{id}})" class="swiper-slide padding" style="background: url({{Фон}})">
 
-                        <div class="cover"></div>
+                            <div class="cover"></div>
 
-                        <div class="item-title text-color-white margin-bottom"><b>{{Название}}</b></div>
-                        <div class="item-author text-color-white">{{Автор}}</div>
+                            <div class="item-title text-color-white margin-bottom"><b>{{Название}}</b></div>
+                            <div class="item-author text-color-white">{{Автор}}</div>
 
-                    </div>
+                        </div>
 
                     {{/each}}
 
@@ -109,7 +109,10 @@
 
             pageInit: function() {
 
-                new Swiper('.swiper-container', {
+                var component = this;
+                var page = component.$el;
+
+                var swiper = new Swiper(page.find('.swiper-container'), {
                     effect: 'coverflow',
                     grabCursor: true,
                     centeredSlides: true,

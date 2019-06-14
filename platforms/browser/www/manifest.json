@@ -6,6 +6,13 @@
   "version": "com.abujabir.ml",
   "description": "Аудио лекции СаидАхмада Муцалаулского.",
   "author": "Umakhan Magomedov",
-  "icons": [],
+  "icons": [
+    {
+      "src": "www/icon.png",
+      "type": "image/png",
+      "sizes": "undefinedxundefined"
+    }
+  ],
+  "orientation": "portrait",
   "start_url": "index.html"
 }
