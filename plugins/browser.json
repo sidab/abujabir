@@ -15,6 +15,9 @@
     },
     "cordova-plugin-crosswalk-webview": {
       "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-android-support-gradle-release": {
+      "PACKAGE_NAME": "com.abujabir.ml"
     }
   },
   "dependent_plugins": {}
