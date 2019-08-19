@@ -8,7 +8,6 @@
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
-    <preference default="arm" name="buildArchitecture" />
     <name>Единобожие - Вероубеждение</name>
     <description>
         Аудио лекции СаидАхмада Муцалаулского.
@@ -48,6 +47,4 @@
     <preference name="FadeSplashScreen" value="false" />
     <preference name="SplashScreenBackgroundColor" value="0xeeeeeeee" />
     <preference name="phonegap-version" value="cli-9.0.0" />
-    <preference name="xwalk64bit" value="false" />
-    <preference name="buildArchitecture" value="x86_64" />
 </widget>

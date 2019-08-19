@@ -13,13 +13,7 @@
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
-    "cordova-plugin-build-architecture": {
-      "PACKAGE_NAME": "com.abujabir.ml"
-    },
     "cordova-plugin-crosswalk-webview": {
-      "PACKAGE_NAME": "com.abujabir.ml"
-    },
-    "cordova-android-support-gradle-release": {
       "PACKAGE_NAME": "com.abujabir.ml"
     }
   },
