@@ -17,6 +17,8 @@
     <preference name="SplashScreenBackgroundColor" value="0xeeeeeeee" />
     <preference name="phonegap-version" value="cli-8.1.1" />
     <preference name="android-targetSdkVersion" value="28" />
+    <preference name="xwalk64bit" value="true" />
+    <preference name="buildArchitecture" value="arm64" />
     <icon src="www/icon.png" />
     <platform name="ios">
         <icon height="1024" src="www/res/icon/ios/icon-1024.png" width="1024" />
@@ -68,4 +70,5 @@
     <plugin name="cordova-plugin-splashscreen" spec="~5.0.2" />
     <plugin name="cordova-plugin-background-audio" spec="~1.0.0" />
     <plugin name="cordova-plugin-crosswalk-webview" spec="~2.4.0" />
+    <plugin name="cordova-plugin-build-architecture" spec="1.0.6" />
 </widget>

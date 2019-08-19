@@ -18,6 +18,9 @@
     },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "cordova-plugin-build-architecture": {
+      "PACKAGE_NAME": "com.abujabir.ml"
     }
   },
   "dependent_plugins": {}
