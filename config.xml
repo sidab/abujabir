@@ -67,6 +67,4 @@
     <plugin name="cordova-plugin-whitelist" spec="~1.3.3" />
     <plugin name="cordova-plugin-splashscreen" spec="~5.0.2" />
     <plugin name="cordova-plugin-crosswalk-webview" spec="2.4.0" />
-    <plugin name="cordova-android-support-gradle-release" spec="3.0.1" />
-    <plugin name="cordova-plugin-build-architecture" spec="1.0.6" />
 </widget>
