@@ -69,7 +69,7 @@
     <plugin name="cordova-plugin-crosswalk-webview" spec="2.4.0" />
     <preference name="xwalkMultipleApk" value="true" />
     <preference name="xwalk64bit" value="true" />
-    <plugin name="cordova-build-architecture" spec="https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.3" source="git" />
+    <plugin name="cordova-build-architecture" spec="https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.4" source="git" />
     <preference name="buildArchitecture" value="x86_64" />
 
 </widget>
