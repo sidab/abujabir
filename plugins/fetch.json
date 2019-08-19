@@ -15,14 +15,6 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-background-audio": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-background-audio"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-plugin-crosswalk-webview-v2": {
     "source": {
       "type": "registry",
