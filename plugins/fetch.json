@@ -30,13 +30,5 @@
     },
     "is_top_level": true,
     "variables": {}
-  },
-  "cordova-plugin-build-architecture": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-build-architecture@1.0.6"
-    },
-    "is_top_level": true,
-    "variables": {}
   }
 }

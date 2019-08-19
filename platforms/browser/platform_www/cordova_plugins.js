@@ -21,8 +21,7 @@ module.exports.metadata =
     "cordova-plugin-background-audio": "1.0.0",
     "cordova-plugin-crosswalk-webview": "2.4.0",
     "cordova-plugin-splashscreen": "5.0.2",
-    "cordova-plugin-whitelist": "1.3.3",
-    "cordova-plugin-build-architecture": "1.0.6"
+    "cordova-plugin-whitelist": "1.3.3"
 }
 // BOTTOM OF METADATA
 });
