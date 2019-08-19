@@ -15,6 +15,9 @@
     },
     "cordova-plugin-crosswalk-webview-v2": {
       "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-build-architecture": {
+      "PACKAGE_NAME": "com.abujabir.ml"
     }
   },
   "dependent_plugins": {}
