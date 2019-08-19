@@ -20,7 +20,8 @@ module.exports.metadata =
 {
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-whitelist": "1.3.3",
-    "cordova-plugin-crosswalk-webview": "2.4.0"
+    "cordova-plugin-crosswalk-webview": "2.4.0",
+    "cordova-plugin-background-audio": "1.0.0"
 }
 // BOTTOM OF METADATA
 });
