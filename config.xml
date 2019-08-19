@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.abujabir.ml" version="2.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.abujabir.ml" version="2.2.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Единобожие - Вероубеждение</name>
     <description>
         Аудио лекции СаидАхмада Муцалаулского.
@@ -16,8 +16,8 @@
     <preference name="FadeSplashScreen" value="false" />
     <preference name="SplashScreenBackgroundColor" value="0xeeeeeeee" />
     <preference name="phonegap-version" value="cli-9.0.0" />
-    <!--<preference name="android-targetSdkVersion" value="28" />-->
     <preference name="android-minSdkVersion" value="19" />
+    <preference name="xwalk64bit" value="true" />
     <icon src="www/icon.png" />
     <platform name="ios">
         <icon height="1024" src="www/res/icon/ios/icon-1024.png" width="1024" />
