@@ -4,20 +4,22 @@
 
         <div class="page-content">
 
-            <div class="block-title-medium text-align-center text-color-white">Единобожие - Вероубеждение</div>
+            <div class="block-title block-title-large text-color-white">Единобожие - Вероубеждение</div>
 
-            <div class="swiper-container swiper-books">
+            <div class="books">
 
-                <div class="swiper-wrapper">
+                <div class="books-inner">
 
                     {{#each books}}
 
-                        <div @click="book({{id}})" class="swiper-slide padding" style="background: url({{Фон}})">
+                        <div data-id="{{id}}" style="background-image: url({{Фон}})" class="book elevation-5 padding">
 
-                            <div class="cover"></div>
+                            <div class="book-inner">
 
-                            <div class="item-title text-color-white margin-bottom"><b>{{Название}}</b></div>
-                            <div class="item-author text-color-white">{{Автор}}</div>
+                                <div class="book-title text-color-white margin-bottom">{{Название}}</div>
+                                <div class="book-author text-color-white">{{Автор}}</div>
+
+                            </div>
 
                         </div>
 
@@ -35,55 +37,63 @@
 
 <style scoped>
 
-    {{this}} .page-content {
-        background: url(img/bg3.jpg) no-repeat;
-        background-size: cover !important;
+    .page-content {
+        background: url(img/bg.jpg) no-repeat;
+        background-size: cover;
+        background-position: center;
+        overflow: hidden;
+    }
+    .block-title-large {
+        margin-top: 50px;
+        font-family: 'SF UI Display';
+        font-weight: 100;
+        font-size: 25px;
     }
 
-    {{this}} .block-title-medium {
-                 margin-top: 50px;
-             }
+    .books {
+        margin-top: 50px;
+        height: 100%;
+    }
 
-    {{this}} .swiper-books {
-                 margin: 0 auto;
-                 margin-top: 60px;
-             }
+    .books-inner {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+        padding-left: 20px;
+        height: 100%;
+    }
 
-    {{this}} .swiper-books .swiper-slide {
-                 width: 60%;
-                 max-width: 250px;
-                 background-size: cover !important;
-                 height: 250px;
-                 border-radius: 5px;
-             }
+    .book {
+        display: inline-block;
+        width: 250px;
+        height: 330px;
+        border: 1px solid;
+        margin-right: 20px;
+        border-radius: 5px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+    }
 
-    {{this}} .swiper-books .swiper-slide .item-title {
-                 font-size: 23px;
-             }
+    .book-inner {
+        position: absolute;
+    }
 
-    {{this}} .swiper-books .swiper-slide .item-author {
-                 font-size: 16px;
-             }
+    .book-title, .book-author {
+        z-index: 99;
+        white-space: normal;
+        font-family: 'SF UI Display';
+        font-weight: 100;
+    }
 
-    {{this}} .swiper-books .swiper-slide .cover {
-                 position: absolute;
-                 width: 100%;
-                 height: 100%;
-                 background: rgba(0, 0, 0, 0.50);
-                 z-index: 9;
-                 margin: -16px;
-                 border-radius: 5px;
-             }
+    .book-title {
+        font-size: 23px;
+        font-weight: 400;
+    }
 
-    {{this}} .swiper-books .swiper-slide .item-author, .swiper-books .swiper-slide .item-title {
-                 text-shadow: #000 1px 0px, black 1px 1px, black 0px 1px, black -1px 1px, black -1px 0px, black -1px -1px, black 0px -1px, black 1px -1px;
-                 position: relative;
-                 z-index: 99;
-             }
-
-    {{this}} .swiper-books img {
-                 width: 100%;
-             }
+    .book-author {
+        font-size: 16px;
+    }
 
 </style>
 
@@ -94,16 +104,14 @@
         data: function () {
 
             return {
+
                 books: app.methods.books()
+
             }
 
         },
         methods: {
-            book: function (id) {
 
-                app.views.current.router.navigate('/book/' + id);
-
-            }
         },
         on: {
 
@@ -112,18 +120,12 @@
                 var component = this;
                 var page = component.$el;
 
-                var swiper = new Swiper(page.find('.swiper-container'), {
-                    effect: 'coverflow',
-                    grabCursor: true,
-                    centeredSlides: true,
-                    slidesPerView: 'auto',
-                    coverflowEffect: {
-                        rotate: 30,
-                        stretch: -20,
-                        depth: 100,
-                        modifier: 1,
-                        slideShadows : true,
-                    }
+                page.find('.book').on('click', function () {
+
+                    var id = $$(this).data('id');
+
+                    app.views.current.router.navigate('/book/' + id);
+
                 });
 
             }

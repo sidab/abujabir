@@ -4,7 +4,8 @@
   "displayName": "Единобожие - Вероубеждение",
   "cordova": {
     "platforms": [
-      "browser"
+      "browser",
+      "android"
     ],
     "plugins": {
       "cordova-plugin-whitelist": {},
@@ -14,6 +15,7 @@
     }
   },
   "dependencies": {
+    "cordova-android": "^7.1.4",
     "cordova-browser": "^5.0.4",
     "cordova-plugin-background-audio": "~1.0.0",
     "cordova-plugin-crosswalk-webview": "~2.4.0",

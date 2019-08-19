@@ -6,9 +6,10 @@ var audioEl = audioElDom7[0];
 var app = new Framework7({
     root: '#app',
     name: 'Абу Джабир',
-    theme: 'auto',
-    version: 1.5,
+    theme: 'ios',
+    version: 2.0,
     routes: routes,
+    backend: 'https://abujabir.ru/new/',
     touch: {
         mdTouchRipple: false,
         tapHold: false,
@@ -17,26 +18,22 @@ var app = new Framework7({
         fastClicks: true
     },
     view: {
-        mdSwipeBack: true,
         animate: false,
         iosDynamicNavbar: false,
         stackPages: true
     },
+    dialog: {
+        buttonCancel: 'Отмена',
+        buttonOk: 'Ок'
+    },
     methods: {
         books: function (id) {
 
-            if (localStorage.books == undefined) {
+            var app = this;
 
-                app.request({
-                    url: 'data.json',
-                    dataType: 'json',
-                    async: false,
-                    success: function (data) {
+            if (localStorage.books == undefined || Number(localStorage.version) !== app.version) {
 
-                        localStorage.books = JSON.stringify(data.Книги);
-
-                    }
-                })
+                app.methods.loadData();
 
             }
 
@@ -60,23 +57,11 @@ var app = new Framework7({
 
         },
         player: {
-            play: function (book, index) {
+            play: function (audio) {
 
-                var audio = book.Аудио[index];
+                localStorage.latest = JSON.stringify(audio);
 
-                localStorage.latest = JSON.stringify({
-                    book: book,
-                    index: index,
-                    audio: audio
-                });
-
-                if (app !== undefined) {
-
-                    app.dialog.preloader('Загрузка...');
-
-                }
-
-                localforage.getItem(audio.Ссылка).then(function(value) {
+                localforage.getItem(audio.url).then(function(value) {
 
                     var src;
 
@@ -86,7 +71,14 @@ var app = new Framework7({
 
                     } else {
 
-                        src = 'https://abujabir.ru/' + audio.Ссылка;
+                        if (app !== undefined) {
+
+                            sheetPlayer.$el.find('.preloader').removeClass('display-none');
+                            sheetPlayer.$el.find('.page-content').addClass('disabled');
+
+                        }
+
+                        src = app.params.backend + audio.url;
 
                     }
 
@@ -94,49 +86,102 @@ var app = new Framework7({
 
                     audioEl.load();
 
+                    sheetPlayer.open();
+
                 });
 
             },
             next: function () {
 
-                var latest = JSON.parse(localStorage.latest);
-
-                var nextAudio = latest.book.Аудио[+ latest.index + 1];
-
-                if (nextAudio !== undefined) {
-
-                    this.play(latest.book, + latest.index + 1);
-
-                } else {
-
-                    this.play(latest.book, 0);
-
-                }
-
             },
             prev: function () {
 
-                var latest = JSON.parse(localStorage.latest);
+            }
+        },
+        loadData: function() {
 
-                var nextAudio = latest.book.Аудио[+ latest.index - 1];
+            app.request({
+                url: app.params.backend + '/data.json',
+                dataType: 'json',
+                async: false,
+                success: function (data) {
 
-                if (nextAudio !== undefined) {
-
-                    this.play(latest.book, + latest.index - 1);
-
-                } else {
-
-                    this.play(latest.book, 0);
+                    localStorage.books = JSON.stringify(data.Книги);
+                    localStorage.version = app.version;
 
                 }
+            });
 
-            }
+        },
+        checkVersion: function () {
+
+            var app = this;
+
+            app.request({
+                url: encodeURI('https://goldproekt.com/api/abujabir'),
+                cache: false,
+                dataType: 'json',
+                success: function (response) {
+
+                    var appVersion = response.appVersion;
+                    var audioVersion = response.audioVersion;
+                    var dataVersion = response.dataVersion;
+
+                    if (appVersion > app.version) {
+
+                        app.dialog.alert('Вышла новая версия приложения, обновитесь пожалуйста.', function () {
+
+                            if (app.device.ios) {
+
+                                var updateLink = response.updateLink.ios;
+
+                                window.open(updateLink, '_system');
+
+                            } else {
+
+                                var updateLink = response.updateLink.android;
+
+                                window.open(updateLink, '_system');
+
+                            }
+
+                        });
+
+                    }
+
+                    if (dataVersion > Number(localStorage.dataVersion)) {
+
+                        localStorage.removeItem('books');
+
+                        localStorage.dataVersion = dataVersion;
+
+                    }
+
+                    if (audioVersion > Number(localStorage.audioVersion)) {
+
+                        localforage.clear();
+
+                        localStorage.audioVersion = audioVersion;
+
+                    }
+
+                }
+            });
+
         }
     },
     on: {
         init: function () {
 
             var app = this;
+
+            app.methods.checkVersion();
+
+            setInterval(function () {
+
+                app.methods.checkVersion();
+
+            }, 30000);
 
             var sheetPlayer = app.sheet.create({
                 el: '.sheet-player',
@@ -150,6 +195,20 @@ var app = new Framework7({
                 min: 0,
                 on: {
                     change: function (range, value) {
+
+                        var currentTimeMinutes = Math.floor(audioEl.currentTime / 60).toLocaleString('en-US', {
+                            minimumIntegerDigits: 2,
+                            useGrouping: false
+                        });
+
+                        var currentTimeSeconds = (Math.floor(audioEl.currentTime) - currentTimeMinutes * 60).toLocaleString('en-US', {
+                            minimumIntegerDigits: 2,
+                            useGrouping: false
+                        });
+
+                        var currentTime = currentTimeMinutes + ':' + currentTimeSeconds;
+
+                        sheetPlayer.$el.find('.current-time').html(currentTime);
 
                         if (change) {
 
@@ -172,7 +231,7 @@ var app = new Framework7({
 
                 latestTime = latest.time;
 
-                app.methods.player.play(latest.book, latest.index);
+                app.methods.player.play(latest);
 
             }
 
@@ -196,17 +255,13 @@ app.views.create('.view-main', {
     main: true
 });
 
-var audioRange = app.range.get('.range-audio');
-var sheetPlayer = app.sheet.get('.sheet-player');
-var toolbarPlayer = $$('.toolbar-player');
-
 $$(document).on('deviceready', function () {
 
     setTimeout(function () {
 
         navigator.splashscreen.hide();
 
-    }, 500);
+    }, 100);
 
     viewUrls = [];
 
@@ -254,15 +309,32 @@ $$(document).on('deviceready', function () {
 
 });
 
+var audioRange = app.range.get('.range-audio');
+var sheetPlayer = app.sheet.get('.sheet-player');
+var toolbarPlayer = $$('.toolbar-player');
+
 audioElDom7.on('loadedmetadata', function () {
 
     var latest = JSON.parse(localStorage.latest);
 
-    sheetPlayer.$el.find('.audio-title').html(latest.book.Название + ' - ' + latest.audio.Название);
-    sheetPlayer.$el.find('.audio-author').html(latest.book.Автор);
+    sheetPlayer.$el.find('.audio-title').html(latest.title);
+
+    if (latest.title.length > 20) {
+
+        sheetPlayer.$el.find('.audio-title').addClass('marquee');
+        toolbarPlayer.find('.audio-title').addClass('marquee');
+
+    } else {
+
+        sheetPlayer.$el.find('.audio-title').removeClass('marquee');
+        toolbarPlayer.find('.audio-title').removeClass('marquee');
+
+    }
+
+    sheetPlayer.$el.find('.audio-author').html(latest.author);
 
     toolbarPlayer.removeClass('display-none');
-    toolbarPlayer.find('.audio-title').html(latest.audio.Название);
+    toolbarPlayer.find('.audio-title').html(latest.title);
 
     audioRange.max = audioEl.duration.toFixed(0);
 
@@ -280,17 +352,18 @@ audioElDom7.on('loadedmetadata', function () {
 
     sheetPlayer.$el.find('.duration').html(duration);
 
-    sheetPlayer.open();
+    audioElDom7.once('canplay', function () {
 
-    audioElDom7.once('canplaythrough', function () {
-
-        app.dialog.close();
+        sheetPlayer.$el.find('.preloader').addClass('display-none');
+        sheetPlayer.$el.find('.page-content').removeClass('disabled');
 
         if (firstPlay && localStorage.latest !== undefined) {
 
             setTimeout(function () {
+
                 audioEl.currentTime = latestTime;
-            })
+
+            });
 
             firstPlay = false;
 
@@ -300,26 +373,6 @@ audioElDom7.on('loadedmetadata', function () {
 
         }
 
-    });
-
-});
-
-audioElDom7.on('loadeddata', function () {
-
-    var latest = JSON.parse(localStorage.latest);
-
-    app.request({
-        url: encodeURI('https://abujabir.ru/' + latest.audio.Ссылка),
-        xhrFields: {
-            responseType: 'blob'
-        },
-        success: function (blob) {
-
-            var blobURL = window.URL.createObjectURL(blob);
-
-            localforage.setItem(latest.audio.Ссылка, blob);
-
-        }
     });
 
 });
@@ -371,11 +424,5 @@ audioElDom7.on('pause', function () {
 
     toolbarPlayer.find('.resume').removeClass('display-none');
     toolbarPlayer.find('.pause').addClass('display-none');
-
-});
-
-audioElDom7.on('ended', function () {
-
-    app.methods.player.next();
 
 });

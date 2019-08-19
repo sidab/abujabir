@@ -28,14 +28,34 @@
 
     <body>
 
-        <div id="app" class="color-theme-black">
+        <div id="app">
 
             <audio class="display-none"></audio>
-            <video class="display-none" loop></video>
 
             <div class="sheet-modal sheet-player">
 
                 <div class="sheet-modal-inner">
+
+                    <div class="preloader display-none">
+
+                            <span class="preloader-inner">
+
+                                <span class="preloader-inner-line"></span>
+                                <span class="preloader-inner-line"></span>
+                                <span class="preloader-inner-line"></span>
+                                <span class="preloader-inner-line"></span>
+                                <span class="preloader-inner-line"></span>
+                                <span class="preloader-inner-line"></span>
+                                <span class="preloader-inner-line"></span>
+                                <span class="preloader-inner-line"></span>
+                                <span class="preloader-inner-line"></span>
+                                <span class="preloader-inner-line"></span>
+                                <span class="preloader-inner-line"></span>
+                                <span class="preloader-inner-line"></span>
+
+                            </span>
+
+                    </div>
 
                     <div class="page-content">
 
@@ -47,7 +67,7 @@
 
                                 <li>
 
-                                    <div class="item-cell width-auto flex-shrink-0 current-time">00:00</div>
+                                    <div class="item-cell flex-shrink-0 current-time">00:00</div>
 
                                     <div class="item-cell flex-shrink-3">
 
@@ -63,14 +83,15 @@
 
                         </div>
 
-                        <div class="audio-title text-align-center"></div>
+                        <div class="audio-title padding-horizontal margin-bottom text-align-center"></div>
+
                         <div class="audio-author text-align-center margin-bottom"></div>
 
                         <div class="row text-align-center audio-controls padding-top">
 
                             <div class="col-30">
 
-                                <i onclick="app.methods.player.prev()" class="icon material-icons">skip_previous</i>
+                                <i onclick="app.methods.player.prev()" class="icon material-icons disabled">skip_previous</i>
 
                             </div>
 
@@ -83,7 +104,7 @@
 
                             <div class="col-30">
 
-                                <i onclick="app.methods.player.next()" class="icon material-icons">skip_next</i>
+                                <i onclick="app.methods.player.next()" class="icon material-icons disabled">skip_next</i>
 
                             </div>
 
@@ -99,13 +120,13 @@
 
                 <div class="toolbar toolbar-bottom toolbar-player display-none">
 
-                    <div class="toolbar-inner">
+                    <div class="toolbar-inner no-padding-right">
 
                         <div class="row">
 
                             <div data-sheet=".sheet-player" class="col-70 padding-left audio-title sheet-open"></div>
 
-                            <div class="col-30">
+                            <div class="col-30 controls">
 
                                 <i onclick="audioEl.play()" class="icon text-align-center material-icons resume">play_arrow</i>
                                 <i onclick="audioEl.pause()" class="icon text-align-center material-icons display-none pause">pause</i>
