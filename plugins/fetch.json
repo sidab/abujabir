@@ -23,10 +23,10 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-crosswalk-webview": {
+  "cordova-plugin-crosswalk-webview-v2": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-crosswalk-webview@2.4.0"
+      "id": "cordova-plugin-crosswalk-webview-v2@2.4.3"
     },
     "is_top_level": true,
     "variables": {}
