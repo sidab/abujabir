@@ -16,10 +16,10 @@
     <preference name="FadeSplashScreen" value="false" />
     <preference name="SplashScreenBackgroundColor" value="0xeeeeeeee" />
     <preference name="phonegap-version" value="cli-9.0.0" />
-    <preference name="xwalkMultipleApk" value="true" />
+<!--     <preference name="xwalkMultipleApk" value="true" />
     <preference name="xwalk64bit" value="true" />
     <preference name="buildArchitecture" value="x86_64" />
-    <preference name="xwalkMode" value="shared" />
+    <preference name="xwalkMode" value="shared" /> -->
     <preference name="android-minSdkVersion" value="19" />
 
     <icon src="www/icon.png" />
@@ -71,6 +71,6 @@
     <plugin name="cordova-plugin-whitelist" spec="~1.3.3" />
     <plugin name="cordova-plugin-splashscreen" spec="~5.0.2" />
     <plugin name="cordova-plugin-crosswalk-webview" spec="2.4.0" />
-    <plugin name="cordova-build-architecture" source="git" spec="https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.4" />
+    <!-- <plugin name="cordova-build-architecture" source="git" spec="https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.4" /> -->
     <plugin name="cordova-plugin-background-audio" spec="1.1.0" />
 </widget>
