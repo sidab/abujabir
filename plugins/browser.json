@@ -18,6 +18,9 @@
     },
     "cordova-android-support-gradle-release": {
       "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-build-architecture": {
+      "PACKAGE_NAME": "com.abujabir.ml"
     }
   },
   "dependent_plugins": {}
