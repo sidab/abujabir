@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+
+        <meta name="description" content="Данный сайт содержит в себе аудиоуроки по вероубеждению в частности по единобожию в поклонении.">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="default">
+        <meta name="apple-mobile-web-app-title" content="Единобожие - Вероубеждение">
+        <meta name="application-name" content="Единобожие - Вероубеждение">
+
+        <title>СаидАхмад АбуДжабир Муцалаулский - Лекции</title>
+
+        <link rel="stylesheet" href="css/framework7.min.css">
+        <link rel="stylesheet" href="css/icons.css">
+        <link rel="stylesheet" href="css/app.css">
+
+        <link rel="apple-touch-icon" href="/img/icon.png" />
+        <link rel="icon" type="image/png" href="/img/icon.png">
+        <link rel="preconnect" href="https://abujabir.ru/">
+
+    </head>
+
+    <body>
+
+        <div id="app">
+
+            <audio class="display-none"></audio>
+
+            <div class="sheet-modal sheet-player">
+
+                <div class="sheet-modal-inner">
+
+                    <div class="preloader display-none">
+
+                            <span class="preloader-inner">
+
+                                <span class="preloader-inner-line"></span>
+                                <span class="preloader-inner-line"></span>
+                                <span class="preloader-inner-line"></span>
+                                <span class="preloader-inner-line"></span>
+                                <span class="preloader-inner-line"></span>
+                                <span class="preloader-inner-line"></span>
+                                <span class="preloader-inner-line"></span>
+                                <span class="preloader-inner-line"></span>
+                                <span class="preloader-inner-line"></span>
+                                <span class="preloader-inner-line"></span>
+                                <span class="preloader-inner-line"></span>
+                                <span class="preloader-inner-line"></span>
+
+                            </span>
+
+                    </div>
+
+                    <div class="page-content">
+
+                        <div class="swipe-handler margin-bottom"></div>
+
+                        <div class="list simple-list">
+
+                            <ul>
+
+                                <li>
+
+                                    <div class="item-cell flex-shrink-0 current-time">00:00</div>
+
+                                    <div class="item-cell flex-shrink-3">
+
+                                        <div class="range-slider range-audio"></div>
+
+                                    </div>
+
+                                    <div class="item-cell width-auto flex-shrink-0 duration">00:00</div>
+
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                        <div class="audio-title padding-horizontal margin-bottom text-align-center"></div>
+
+                        <div class="audio-author text-align-center margin-bottom"></div>
+
+                        <div class="row text-align-center audio-controls padding-top">
+
+                            <div class="col-30">
+
+                                <i onclick="app.methods.player.prev()" class="icon material-icons disabled">skip_previous</i>
+
+                            </div>
+
+                            <div class="col-40">
+
+                                <i onclick="audioEl.pause()" class="icon material-icons display-none pause">pause</i>
+                                <i onclick="audioEl.play()" class="icon material-icons resume">play_arrow</i>
+
+                            </div>
+
+                            <div class="col-30">
+
+                                <i onclick="app.methods.player.next()" class="icon material-icons disabled">skip_next</i>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="view view-main">
+
+                <div class="toolbar toolbar-bottom toolbar-player display-none">
+
+                    <div class="toolbar-inner no-padding-right">
+
+                        <div class="row">
+
+                            <div data-sheet=".sheet-player" class="col-70 padding-left audio-title sheet-open"></div>
+
+                            <div class="col-30 controls">
+
+                                <i onclick="audioEl.play()" class="icon text-align-center material-icons resume">play_arrow</i>
+                                <i onclick="audioEl.pause()" class="icon text-align-center material-icons display-none pause">pause</i>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <script src="cordova.js"></script>
+        <script src="js/framework7.min.js"></script>
+        <script src="js/localforage.min.js" defer></script>
+        <script src="js/routes.js" defer></script>
+        <script src="js/app.js" defer></script>
+
+    </body>
+
+</html>
