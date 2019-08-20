@@ -1,0 +1,21 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-background-audio": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    }
+  },
+  "dependent_plugins": {}
+}
