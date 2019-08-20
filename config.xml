@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.abujabir.ml" version="4.5.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.abujabir.ml" version="4.6.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Единобожие - Вероубеждение</name>
     <description>
         Аудио лекции СаидАхмада Муцалаулского.
@@ -68,8 +68,8 @@
     <plugin name="cordova-plugin-background-audio" spec="1.1.0" />
     <plugin name="cordova-plugin-crosswalk-webview" spec="2.4.0"/>
     <plugin name="cordova-build-architecture" spec="https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.4" source="git" />
-    <preference name="xwalk64bit" value="false" />
-    <preference name="buildArchitecture" value="x86" />
+    <preference name="xwalk64bit" value="true" />
+    <preference name="buildArchitecture" value="arm64" />
     <preference name="xwalkMultipleApk" value="true" />
 
 </widget>
