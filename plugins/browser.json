@@ -15,9 +15,6 @@
     },
     "cordova-plugin-background-audio": {
       "PACKAGE_NAME": "com.abujabir.ml"
-    },
-    "cordova-plugin-crosswalk-webview": {
-      "PACKAGE_NAME": "com.abujabir.ml"
     }
   },
   "dependent_plugins": {}
