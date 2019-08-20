@@ -75,7 +75,5 @@
         <variable name="XWALK_COMMANDLINE" value="--disable-pull-to-refresh-effect" />
         <variable name="XWALK_MODE" value="embedded" />
         <variable name="XWALK_MULTIPLEAPK" value="true" />
-        <variable name="XWALK_64BIT" value="true" />
-        <variable name="xwalk64bit" value="true" />
     </plugin>
 </widget>
