@@ -68,8 +68,8 @@
     <plugin name="cordova-plugin-background-audio" spec="1.1.0" />
     <plugin name="cordova-plugin-crosswalk-webview" spec="2.4.0"/>
     <plugin name="cordova-build-architecture" spec="https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.4" source="git" />
-    <preference name="xwalk64bit" value="true" />
-    <preference name="buildArchitecture" value="arm64" />
+    <preference name="xwalk64bit" value="false" />
+    <preference name="buildArchitecture" value="arm" />
     <preference name="xwalkMultipleApk" value="true" />
 
 </widget>
