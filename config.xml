@@ -65,12 +65,10 @@
     <engine name="browser" spec="^5.0.4" />
 
     <plugin name="cordova-plugin-crosswalk-webview" spec="2.4.0">
-        <variable name="XWALK_MODE" value="embedded" />
     </plugin>
-    <plugin name="cordova-build-architecture" spec="https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.3" source="git" />
+    <plugin name="cordova-build-architecture" spec="https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.4" source="git" />
     <preference name="xwalk64bit" value="true" />
     <preference name="buildArchitecture" value="x86_64" />
     <preference name="xwalkMultipleApk" value="true" />
-    <preference name="xwalkVersion" value="xwalk_core_library:23.53.589.4" />
 
 </widget>
