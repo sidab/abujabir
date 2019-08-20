@@ -91,7 +91,7 @@ ext {
 }
 
 // PLUGIN GRADLE EXTENSIONS START
-apply from: "../cordova-plugin-crosswalk-webview/ml-xwalk.gradle"
+apply from: "../cordova-build-architecture/ml-architecture.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 def hasBuildExtras1 = file('build-extras.gradle').exists()

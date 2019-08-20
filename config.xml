@@ -67,7 +67,6 @@
     <plugin name="cordova-plugin-whitelist" spec="~1.3.3" />
     <plugin name="cordova-plugin-splashscreen" spec="~5.0.2" />
     <plugin name="cordova-plugin-background-audio" spec="1.1.0" />
-    <plugin name="cordova-build-architecture" spec="git+https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.4" />
     <plugin name="cordova-plugin-crosswalk-webview" spec="2.4.0">
         <variable name="XWALK_VERSION" value="23+" />
         <variable name="XWALK_LITEVERSION" value="xwalk_core_library_canary:17+" />
