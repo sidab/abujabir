@@ -17,6 +17,8 @@
     <preference name="SplashScreenBackgroundColor" value="0xeeeeeeee" />
     <preference name="phonegap-version" value="cli-9.0.0" />
     <preference name="android-minSdkVersion" value="19" />
+    <preference name="xwalk64bit" value="true" />
+
     <icon src="www/icon.png" />
     <platform name="ios">
         <icon height="1024" src="www/res/icon/ios/icon-1024.png" width="1024" />
@@ -73,6 +75,7 @@
         <variable name="XWALK_COMMANDLINE" value="--disable-pull-to-refresh-effect" />
         <variable name="XWALK_MODE" value="embedded" />
         <variable name="XWALK_MULTIPLEAPK" value="true" />
-        <variable name="XWALK_MULTIPLEAPK" value="xwalk64bit" />
+        <variable name="XWALK_64BIT" value="true" />
+        <variable name="xwalk64bit" value="true" />
     </plugin>
 </widget>
