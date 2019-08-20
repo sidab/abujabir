@@ -70,6 +70,6 @@
         <variable name="XWALK_MODE" value="lite" />
     </plugin>
     <plugin name="cordova-plugin-build-architecture" spec="1.0.6" />
-    <preference name="buildArchitecture" value="x86_64" />
+    <preference name="buildArchitecture" value="arm" />
 
 </widget>
