@@ -23,12 +23,14 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-build-architecture": {
+  "cordova-plugin-crosswalk-webview": {
     "source": {
       "type": "registry",
-      "id": "git+https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.4"
+      "id": "cordova-plugin-crosswalk-webview@2.4.0"
     },
     "is_top_level": true,
-    "variables": {}
+    "variables": {
+      "XWALK_MODE": "lite"
+    }
   }
 }
