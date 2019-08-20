@@ -16,6 +16,7 @@
     <preference name="FadeSplashScreen" value="false" />
     <preference name="SplashScreenBackgroundColor" value="0xeeeeeeee" />
     <preference name="phonegap-version" value="cli-9.0.0" />
+    <preference name="android-minSdkVersion" value="19" />
     <icon src="www/icon.png" />
     <platform name="ios">
         <icon height="1024" src="www/res/icon/ios/icon-1024.png" width="1024" />
