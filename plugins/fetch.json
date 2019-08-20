@@ -32,5 +32,13 @@
     "variables": {
       "XWALK_MODE": "lite"
     }
+  },
+  "cordova-plugin-build-architecture": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-build-architecture"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }
