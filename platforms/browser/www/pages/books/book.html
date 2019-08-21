@@ -16,19 +16,19 @@
 
                 </div>
 
-                <div class="title">{{book.Название}}</div>
+                <div class="title">
 
-                <div class="right">
+                    {{#if book.Название}}
 
-                    <a href="#" class="link download-all">
+                        {{book.Название}}
 
-                        <i class="icon f7-icons">download</i>
+                    {{else}}
 
-                    </a>
+                        Избранные
+
+                    {{/if}}
 
                 </div>
-
-
 
             </div>
 
@@ -55,52 +55,55 @@
 
         <div class="page-content">
 
+            {{#if book}}
+
             <div class="tabs">
 
                 <div class="tab tab-active" id="uroki">
 
                     <div class="list">
 
-                <ul>
+                        <ul>
 
-                    {{#each book.Аудио}}
+                            {{#each book.Аудио}}
 
-                        <li data-index="{{@index}}" class="audio">
+                                <li data-index="{{@index}}" class="audio">
 
-                            <div class="item-content">
+                                    <div class="item-content">
 
-                                <div class="item-media">
+                                        <div class="item-media">
 
-                                    <i class="icon f7-icons">play</i>
+                                            <i class="icon f7-icons">play</i>
 
-                                </div>
+                                        </div>
 
-                                <div class="item-inner">
+                                        <div class="item-inner">
 
-                                    <div class="item-title">{{Название}}</div>
+                                            <div class="item-title">{{Название}}</div>
 
-                                    <div class="item-after">
+                                            <div class="item-after">
 
-                                        <span class="duration">{{Длительность}}</span>
+                                                <span class="duration">{{Длительность}}</span>
 
-                                        <i class="icon f7-icons download">download</i>
-                                        <i class="icon f7-icons downloaded text-color-green display-none">check_round_fill</i>
+                                                <i class="icon f7-icons download">download</i>
+                                                <i class="icon f7-icons downloaded text-color-green display-none">check_round_fill</i>
+                                                <div class="gauge gauge-progress"></div>
+                                                <i class="icon f7-icons favorite add-to-favorite">star</i>
+                                                <i class="icon f7-icons favorite display-none remove-from-favorite text-color-orange">star_fill</i>
 
-                                        <div class="gauge gauge-progress"></div>
+                                            </div>
+
+                                        </div>
 
                                     </div>
 
-                                </div>
+                                </li>
 
-                            </div>
+                            {{/each}}
 
-                        </li>
+                        </ul>
 
-                    {{/each}}
-
-                </ul>
-
-            </div>
+                    </div>
 
                 </div>
 
@@ -154,8 +157,9 @@
 
                                                                     <i class="icon f7-icons download">download</i>
                                                                     <i class="icon f7-icons downloaded text-color-green display-none">check_round_fill</i>
-
                                                                     <div class="gauge gauge-progress"></div>
+                                                                    <i class="icon f7-icons favorite add-to-favorite">star</i>
+                                                                    <i class="icon f7-icons favorite display-none remove-from-favorite text-color-orange">star_fill</i>
 
                                                                 </div>
 
@@ -187,6 +191,12 @@
 
             </div>
 
+            {{else}}
+
+                <div class="block">У вас нет избранных аудиозаписей.</div>
+
+            {{/if}}
+
         </div>
 
     </div>
@@ -199,15 +209,17 @@
 
     }
 
+    .favorite {
+        font-size: 30px;
+    }
+
     .accordion-item-content .list ul {
         background: #eee;
     }
-    .downloaded {
-        padding-top: 4px;
-    }
 
-    .download, .downloaded {
+    .download, .downloaded, .favorite {
         width: 35px;
+        padding-top: 4px;
     }
 
     .gauge-progress {
@@ -216,10 +228,6 @@
 
     .navbar .back {
         margin-left: -8px;
-    }
-
-    .navbar .download-all {
-        margin-right: -8px;
     }
 
     .navbar .icon {
@@ -248,7 +256,33 @@
             var id = this.$route.params.id;
 
             return {
-                book: app.methods.books(id)
+                book: app.methods.books(id),
+                bookl: function () {
+
+                    if (id == 'favorites') {
+
+                        if (localStorage.favorites !== undefined && JSON.parse(localStorage.favorites).length !== 0) {
+
+                            var favorites = {"Аудио": []};
+
+                            favorites.push(JSON.parse(localStorage.favorites));
+
+                            console.log(favorites)
+                            return favorites;
+
+                        } else {
+
+                            return false;
+
+                        }
+
+                    } else {
+
+                       return app.methods.books(id);
+
+                    }
+
+                }
             };
 
         },
@@ -289,15 +323,22 @@
 
                         }
 
-                    });
+                        if(localStorage.favorites !== undefined) {
 
-                });
+                            var favorites = JSON.parse(localStorage.favorites);
 
-                page.find('.download-all').on('click', function () {
+                            favorites.find(function (audio) {
 
-                    app.dialog.confirm('Вы уверены что хотите скачать все аудиозаписи?', 'Внимание', function () {
+                                if (audio.Ссылка == url) {
 
-                        page.find('.download:not(.display-none)').click();
+                                    $this.find('.add-to-favorite').addClass('display-none');
+                                    $this.find('.remove-from-favorite').removeClass('display-none');
+
+                                }
+
+                            });
+
+                        }
 
                     });
 
@@ -372,6 +413,71 @@
 
                         }, false);
 
+
+                    } else if ($$(e.target).hasClass('add-to-favorite')) {
+
+                        var favorites;
+
+                        if (localStorage.favorites !== undefined) {
+
+                            favorites = JSON.parse(localStorage.favorites);
+
+                        } else {
+
+                            favorites = [];
+
+                        }
+
+                        var audio;
+
+                        if ($this.hasClass('audio-child')) {
+
+                            audio = component.book.Аудио[indexParent].Вырезки[index];
+
+                        } else {
+
+                            audio = component.book.Аудио[index];
+
+                        }
+
+                        favorites.push(audio);
+
+                        localStorage.favorites = JSON.stringify(favorites);
+
+                        $$(e.target).addClass('display-none');
+                        $$(e.target).next().removeClass('display-none');
+
+                    } else if ($$(e.target).hasClass('remove-from-favorite')) {
+
+                        if ($this.hasClass('audio-child')) {
+
+                            audio = component.book.Аудио[indexParent].Вырезки[index];
+
+                        } else {
+
+                            audio = component.book.Аудио[index];
+
+                        }
+
+                        var favorites = JSON.parse(localStorage.favorites);
+
+                        favorites = favorites.filter(function (item) {
+
+                            return item.Ссылка !== audio.Ссылка;
+
+                        });
+
+                        if (favorites == undefined) {
+
+                            favorites = [];
+
+                        }
+
+                        localStorage.favorites = JSON.stringify(favorites);
+
+                        $$(e.target).addClass('display-none');
+                        $$(e.target).prev().removeClass('display-none');
+
                     } else {
 
                         if ($this.hasClass('audio-child')) {
@@ -385,9 +491,21 @@
 
                         } else {
 
+                            var title;
+
+                            if (component.book.Название !== undefined) {
+
+                                title = component.book.Название + ' - ' + component.book.Аудио[index].Название;
+
+                            } else {
+
+                                title = component.book.Аудио[index].Название;
+
+                            }
+
                             var audio = {
-                                title: component.book.Название + ' - ' + component.book.Аудио[index].Название,
-                                author: component.book.Автор,
+                                title: title,
+                                author: component.book.Автор !== undefined ? component.book.Автор : '',
                                 url: component.book.Аудио[index].Ссылка,
                                 duration: component.book.Аудио[index].Длительность
                             };

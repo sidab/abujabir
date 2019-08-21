@@ -12,7 +12,7 @@
 
                     {{#each books}}
 
-                        <div data-id="{{id}}" style="background-image: url(/{{Фон}})" class="book elevation-5 padding">
+                        <div data-id="{{id}}" style="background-image: url({{Фон}})" class="book elevation-5 padding">
 
                             <div class="book-inner">
 
@@ -24,6 +24,16 @@
                         </div>
 
                     {{/each}}
+
+                    <div data-id="favorites" style="background-image: url(img/favorites.jpg)" class="book elevation-5 padding">
+
+                        <div class="book-inner">
+
+                            <div class="book-title text-color-white margin-bottom">Избранные</div>
+
+                        </div>
+
+                    </div>
 
                 </div>
 

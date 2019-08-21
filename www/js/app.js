@@ -7,7 +7,7 @@ var app = new Framework7({
     root: '#app',
     name: 'Абу Джабир',
     theme: 'ios',
-    version: 4.6,
+    version: 5.0,
     routes: routes,
     backend: 'https://abujabir.ru/new/',
     touch: {
@@ -41,13 +41,34 @@ var app = new Framework7({
 
             if (id) {
 
-                var book = books.filter(function (book) {
+                if (id == 'favorites') {
 
-                    return book.id == id;
+                    if (localStorage.favorites !== undefined && JSON.parse(localStorage.favorites).length !== 0) {
 
-                })[0];
+                        var favorites = {
+                            "Аудио": JSON.parse(localStorage.favorites)
+                        };
 
-                return book;
+                        return favorites;
+
+                    } else {
+
+                        return false;
+
+                    }
+
+                } else {
+
+                    var book = books.filter(function (book) {
+
+                        return book.id == id;
+
+                    })[0];
+
+                    return book;
+
+                }
+
 
             } else {
 
@@ -58,6 +79,19 @@ var app = new Framework7({
         },
         player: {
             play: function (audio) {
+
+                if (app !== undefined) {
+
+                    sheetPlayer.$el.find('.preloader').removeClass('display-none');
+                    sheetPlayer.$el.find('.page-content').addClass('disabled');
+
+                    if(!sheetPlayer.opened) {
+
+                        sheetPlayer.open();
+
+                    }
+
+                }
 
                 localStorage.latest = JSON.stringify(audio);
 
@@ -71,30 +105,173 @@ var app = new Framework7({
 
                     } else {
 
-                        if (app !== undefined) {
-
-                            sheetPlayer.$el.find('.preloader').removeClass('display-none');
-                            sheetPlayer.$el.find('.page-content').addClass('disabled');
-
-                        }
-
                         src = app.params.backend + audio.url;
 
                     }
 
                     audioElDom7.attr('src', src);
 
-                    audioEl.load();
+                    playing = false;
 
-                    sheetPlayer.open();
+                    audioEl.load();
 
                 });
 
             },
             next: function () {
 
+                var latest = JSON.parse(localStorage.latest);
+                var books = app.methods.books();
+
+                for (var i1 = 0; i1 < books.length; i1++) {
+
+                    var book = books[i1];
+
+                    for (var i2 = 0; i2 < book.Аудио.length; i2++) {
+
+                        if(book.Аудио[i2].Ссылка == latest.url) {
+
+                            var next;
+
+                            if (book.Аудио[i2+1] !== undefined) {
+
+                                next = book.Аудио[i2+1];
+
+                            } else {
+
+                                next = book.Аудио[0];
+
+                            }
+
+                            var audio = {
+                                title: book.Название + ' - ' + next.Название,
+                                author: next.Автор,
+                                url: next.Ссылка,
+                                duration: next.Длительность
+                            };
+
+                            app.methods.player.play(audio);
+
+                            return false;
+
+                        }
+
+                        if (book.Аудио[i2].Вырезки !== undefined) {
+
+                            for (var i3 = 0; i3 < book.Аудио[i2].Вырезки.length; i3++) {
+
+                                if(book.Аудио[i2].Вырезки[i3].Ссылка == latest.url) {
+
+                                    var next;
+
+                                    if (book.Аудио[i2].Вырезки[i3+1] !== undefined) {
+
+                                        next = book.Аудио[i2].Вырезки[i3+1];
+
+                                    } else {
+
+                                        next = book.Аудио[i2].Вырезки[0];
+
+                                    }
+
+                                    var audio = {
+                                        title: next.Название,
+                                        author: '',
+                                        url: next.Ссылка,
+                                        duration: next.Длительность
+                                    };
+
+                                    app.methods.player.play(audio);
+
+                                    return false;
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
             },
             prev: function () {
+
+                var latest = JSON.parse(localStorage.latest);
+                var books = app.methods.books();
+
+                for (var i1 = 0; i1 < books.length; i1++) {
+
+                    var book = books[i1];
+
+                    for (var i2 = 0; i2 < book.Аудио.length; i2++) {
+
+                        if(book.Аудио[i2].Ссылка == latest.url) {
+
+                            var prev;
+
+                            if (book.Аудио[i2-1] !== undefined) {
+
+                                prev = book.Аудио[i2-1];
+
+                            } else {
+
+                                prev = book.Аудио[book.Аудио.length - 1];
+
+                            }
+
+                            var audio = {
+                                title: book.Название + ' - ' + prev.Название,
+                                author: prev.Автор,
+                                url: prev.Ссылка,
+                                duration: prev.Длительность
+                            };
+
+                            app.methods.player.play(audio);
+
+                            return false;
+
+                        }
+
+                        if (book.Аудио[i2].Вырезки !== undefined) {
+
+                            for (var i3 = 0; i3 < book.Аудио[i2].Вырезки.length; i3++) {
+
+                                if(book.Аудио[i2].Вырезки[i3].Ссылка == latest.url) {
+
+                                    var prev;
+
+                                    if (book.Аудио[i2].Вырезки[i3-1] !== undefined) {
+
+                                        prev = book.Аудио[i2].Вырезки[i3-1];
+
+                                    } else {
+
+                                        prev = book.Аудио[i2].Вырезки[book.Аудио[i2].Вырезки.length - 1];
+
+                                    }
+
+                                    var audio = {
+                                        title: prev.Название,
+                                        author: '',
+                                        url: prev.Ссылка,
+                                        duration: prev.Длительность
+                                    };
+
+                                    app.methods.player.play(audio);
+
+                                    return false;
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                }
 
             }
         },
@@ -149,7 +326,7 @@ var app = new Framework7({
 
                     }
 
-                    if (dataVersion > Number(localStorage.dataVersion)) {
+                    if (dataVersion > Number(localStorage.dataVersion) || localStorage.dataVersion == undefined) {
 
                         localStorage.removeItem('books');
 
@@ -157,7 +334,7 @@ var app = new Framework7({
 
                     }
 
-                    if (audioVersion > Number(localStorage.audioVersion)) {
+                    if (audioVersion > Number(localStorage.audioVersion) || localStorage.audioVersion == undefined) {
 
                         localforage.clear();
 
@@ -173,23 +350,21 @@ var app = new Framework7({
     on: {
         init: function () {
 
-            var app = this;
+            app = this;
 
             app.methods.checkVersion();
 
-            setInterval(function () {
+            toolbarPlayer = $$('.toolbar-player');
 
-                app.methods.checkVersion();
-
-            }, 30000);
-
-            var sheetPlayer = app.sheet.create({
+            sheetPlayer = app.sheet.create({
                 el: '.sheet-player',
-                swipeToClose: true,
+                swipeToClose: false,
                 backdrop: true,
+                closeByOutsideClick: true,
+                closeByBackdropClick: true
             });
 
-            var audioRange = app.range.create({
+            audioRange = app.range.create({
                 el: sheetPlayer.$el.find('.range-audio'),
                 label: false,
                 min: 0,
@@ -231,7 +406,11 @@ var app = new Framework7({
 
                 latestTime = latest.time;
 
-                app.methods.player.play(latest);
+                setTimeout(function () {
+
+                    app.methods.player.play(latest);
+
+                }, 100);
 
             }
 
@@ -309,9 +488,15 @@ $$(document).on('deviceready', function () {
 
 });
 
-var audioRange = app.range.get('.range-audio');
-var sheetPlayer = app.sheet.get('.sheet-player');
-var toolbarPlayer = $$('.toolbar-player');
+toolbarPlayer.on('click', function (e) {
+
+    if(!$$(e.target).hasClass('icon')) {
+
+        sheetPlayer.open();
+
+    }
+
+});
 
 audioElDom7.on('loadedmetadata', function () {
 
@@ -319,15 +504,18 @@ audioElDom7.on('loadedmetadata', function () {
 
     sheetPlayer.$el.find('.audio-title').html(latest.title);
 
-    if (latest.title.length > 20) {
+    if (latest.title.length > 20 && latest.title.length < 40) {
 
-        sheetPlayer.$el.find('.audio-title').addClass('marquee');
-        toolbarPlayer.find('.audio-title').addClass('marquee');
+        sheetPlayer.$el.find('.audio-title').addClass('audio-title-medium');
+
+    } else if (latest.title.length >= 40) {
+
+        sheetPlayer.$el.find('.audio-title').addClass('audio-title-small');
 
     } else {
 
-        sheetPlayer.$el.find('.audio-title').removeClass('marquee');
-        toolbarPlayer.find('.audio-title').removeClass('marquee');
+        sheetPlayer.$el.find('.audio-title').removeClass('audio-title-medium');
+        sheetPlayer.$el.find('.audio-title').removeClass('audio-title-small');
 
     }
 
@@ -352,12 +540,37 @@ audioElDom7.on('loadedmetadata', function () {
 
     sheetPlayer.$el.find('.duration').html(duration);
 
+    sheetPlayer.$el.find('.share-button').off('click').on('click', function () {
+
+            app.request({
+                url: encodeURI('https://abujabir.ru/s.php?url=' + audioElDom7.attr('src')),
+                success: function (response) {
+
+                    var appDownloadUrl;
+                    
+                    if (app.device.ios) {
+
+                        appDownloadUrl = 'https://abujabir.ru/s/f0a144';
+
+                    } else {
+
+                        appDownloadUrl = 'https://abujabir.ru/s/ee6804';
+
+                    }
+
+                    window.plugins.socialsharing.share(latest.title + ' 🎧⬇️ ' + "\r\n" + response + "\r\n\r\n" + 'Скачай приложение📱⬇️' + "\r\n" + appDownloadUrl);
+
+                }
+            });
+
+    });
+
     audioElDom7.once('canplay', function () {
 
-        sheetPlayer.$el.find('.preloader').addClass('display-none');
-        sheetPlayer.$el.find('.page-content').removeClass('disabled');
-
         if (firstPlay && localStorage.latest !== undefined) {
+
+            sheetPlayer.$el.find('.preloader').addClass('display-none');
+            sheetPlayer.$el.find('.page-content').removeClass('disabled');
 
             setTimeout(function () {
 
@@ -378,6 +591,15 @@ audioElDom7.on('loadedmetadata', function () {
 });
 
 audioElDom7.on('timeupdate', function () {
+
+    if (playing) {
+
+        sheetPlayer.$el.find('.preloader').addClass('display-none');
+        sheetPlayer.$el.find('.page-content').removeClass('disabled');
+
+    }
+
+    playing = true;
 
     var latest = JSON.parse(localStorage.latest);
 

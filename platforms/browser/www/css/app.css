@@ -22,34 +22,10 @@ html, body {
     display: none;
 }
 
-.swipe-handler {
-    height: 16px;
-    position: absolute;
-    left: 0;
-    width: 100%;
-    top: 0;
-    background: #fff;
-    cursor: pointer;
-    z-index: 10;
-}
-
-.swipe-handler:after {
-    content: '';
-    width: 36px;
-    height: 6px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-left: -18px;
-    margin-top: -3px;
-    border-radius: 3px;
-    background: #666
-}
-
 .sheet-player .preloader {
     position: absolute;
-    top: 45%;
-    left: 45%;
+    top: calc(50% - 25px);
+    left: calc(50% - 25px);
     width: 50px;
     height: 50px;
 }
@@ -61,7 +37,15 @@ html, body {
 .sheet-player .audio-title {
     font-size: 23px;
     font-weight: bold;
-    white-space: nowrap;
+    white-space: normal;
+}
+
+.sheet-player .audio-title-medium {
+    font-size: 18px;
+}
+
+.sheet-player .audio-title-small {
+    font-size: 16px;
 }
 
 .sheet-player .audio-controls i {
@@ -69,7 +53,7 @@ html, body {
 }
 
 .sheet-player {
-    height:300px;
+    height:430px;
     --f7-sheet-bg-color: #fff;
 }
 
@@ -97,20 +81,4 @@ html, body {
     font-size: 35px;
     height: 70px;
     line-height: 70px;
-}
-
-.marquee {
-    animation: marquee 15s linear infinite;
-    width: fit-content;
-}
-
-
-@keyframes marquee {
-    0%   {
-        transform: translateX(50%);
-    }
-    100% {
-
-        transform: translateX(-100%);
-    }
 }

@@ -23,6 +23,14 @@
     "is_top_level": true,
     "variables": {}
   },
+  "cordova-plugin-build-architecture": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-build-architecture"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
   "cordova-plugin-crosswalk-webview": {
     "source": {
       "type": "registry",
@@ -30,15 +38,37 @@
     },
     "is_top_level": true,
     "variables": {
-      "XWALK_MODE": "lite"
+      "XWALK_VERSION": "23+",
+      "XWALK_LITEVERSION": "xwalk_core_library_canary:17+",
+      "XWALK_COMMANDLINE": "--disable-pull-to-refresh-effect",
+      "XWALK_MODE": "embedded",
+      "XWALK_MULTIPLEAPK": "true"
     }
   },
-  "cordova-plugin-build-architecture": {
+  "cordova-build-architecture": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-build-architecture"
+      "id": "https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.4"
     },
     "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-x-socialsharing": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-x-socialsharing"
+    },
+    "is_top_level": true,
+    "variables": {
+      "ANDROID_SUPPORT_V4_VERSION": "24.1.1+"
+    }
+  },
+  "es6-promise-plugin": {
+    "source": {
+      "type": "registry",
+      "id": "es6-promise-plugin@^4.1.0"
+    },
+    "is_top_level": false,
     "variables": {}
   }
 }

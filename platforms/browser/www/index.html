@@ -59,8 +59,6 @@
 
                     <div class="page-content">
 
-                        <div class="swipe-handler margin-bottom"></div>
-
                         <div class="list simple-list">
 
                             <ul>
@@ -91,7 +89,7 @@
 
                             <div class="col-30">
 
-                                <i onclick="app.methods.player.prev()" class="icon material-icons disabled">skip_previous</i>
+                                <i onclick="app.methods.player.prev()" class="icon material-icons">skip_previous</i>
 
                             </div>
 
@@ -104,9 +102,15 @@
 
                             <div class="col-30">
 
-                                <i onclick="app.methods.player.next()" class="icon material-icons disabled">skip_next</i>
+                                <i onclick="app.methods.player.next()" class="icon material-icons">skip_next</i>
 
                             </div>
+
+                        </div>
+
+                        <div class="block">
+
+                            <button class="button button-large button-raised button-fill share-button">Поделиться</button>
 
                         </div>
 
@@ -124,7 +128,7 @@
 
                         <div class="row">
 
-                            <div data-sheet=".sheet-player" class="col-70 padding-left audio-title sheet-open"></div>
+                            <div class="col-70 padding-left audio-title"></div>
 
                             <div class="col-30 controls">
 
