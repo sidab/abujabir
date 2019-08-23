@@ -79,5 +79,4 @@
     <plugin name="cordova-plugin-x-socialsharing" spec="5.4.7">
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="24.1.1+" />
     </plugin>
-    <plugin name="onesignal-cordova-plugin" spec="2.4.0" />
 </widget>
