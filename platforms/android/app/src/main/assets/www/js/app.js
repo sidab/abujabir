@@ -7,7 +7,7 @@ var app = new Framework7({
     root: '#app',
     name: 'Абу Джабир',
     theme: 'ios',
-    version: 4.6,
+    version: 5.0,
     routes: routes,
     backend: 'https://abujabir.ru/new/',
     touch: {
@@ -411,7 +411,6 @@ var app = new Framework7({
                     app.methods.player.play(latest);
 
                 }, 100);
-
 
             }
 
