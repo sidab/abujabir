@@ -7,16 +7,13 @@
     "files": {}
   },
   "installed_plugins": {
+    "cordova-build-architecture": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
     "cordova-plugin-background-audio": {
       "PACKAGE_NAME": "com.abujabir.ml"
     },
     "cordova-plugin-build-architecture": {
-      "PACKAGE_NAME": "com.abujabir.ml"
-    },
-    "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "com.abujabir.ml"
-    },
-    "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.abujabir.ml"
     },
     "cordova-plugin-crosswalk-webview": {
@@ -27,7 +24,10 @@
       "XWALK_MULTIPLEAPK": "true",
       "PACKAGE_NAME": "com.abujabir.ml"
     },
-    "cordova-build-architecture": {
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.abujabir.ml"
     },
     "cordova-plugin-x-socialsharing": {

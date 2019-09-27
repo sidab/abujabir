@@ -15,7 +15,7 @@
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="FadeSplashScreen" value="false" />
     <preference name="SplashScreenBackgroundColor" value="0xeeeeeeee" />
-    <preference name="phonegap-version" value="cli-9.0.0" />
+    <preference name="phonegap-version" value="cli-7.1.0" />
     <preference name="android-minSdkVersion" value="19" />
     <preference name="xwalk64bit" value="true" />
     <preference name="buildArchitecture" value="arm64" />
@@ -68,7 +68,6 @@
     <content src="index.html" />
     <access origin="*" />
     <engine name="browser" spec="^5.0.4" />
-    <engine name="android" spec="^7.1.4" />
     <engine name="ios" spec="^4.5.5" />
     <plugin name="cordova-plugin-whitelist" spec="~1.3.3" />
     <plugin name="cordova-plugin-splashscreen" spec="~5.0.2" />
@@ -79,4 +78,5 @@
     <plugin name="cordova-plugin-x-socialsharing" spec="5.4.7">
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="24.1.1+" />
     </plugin>
+    <engine name="android" spec="~7.1.4" />
 </widget>
