@@ -18,6 +18,11 @@ static NSString *const kShareOptionUrl = @"url";
 }
 
 - (void)pluginInitialize {
+    [self.commandDelegate runInBackground:^{
+        if ([self isEmailAvailable]) {
+            [self cycleTheGlobalMailComposer];
+        }
+    }];
 }
 
 - (void)available:(CDVInvokedUrlCommand*)command {
@@ -107,7 +112,7 @@ static NSString *const kShareOptionUrl = @"url";
     }
 
     if (urlString != (id)[NSNull null] && urlString != nil) {
-        [activityItems addObject:[NSURL URLWithString:[urlString SSURLEncodedString]]];
+        [activityItems addObject:[NSURL URLWithString:[urlString URLEncodedString]]];
     }
 
     UIActivity *activity = [[UIActivity alloc] init];
@@ -230,8 +235,6 @@ static NSString *const kShareOptionUrl = @"url";
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
   } else if ([@"com.apple.social.facebook" caseInsensitiveCompare:via] == NSOrderedSame && [self canShareViaFacebook]) {
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-  } else if ([@"com.apple.social.twitter" caseInsensitiveCompare:via] == NSOrderedSame && [self canShareViaTwitter]) {
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
   } else if ([self isAvailableForSharing:command type:via]) {
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
   } else {
@@ -297,7 +300,7 @@ static NSString *const kShareOptionUrl = @"url";
   }
 
   if (urlString != (id)[NSNull null]) {
-    [composeViewController addURL:[NSURL URLWithString:[urlString SSURLEncodedString]]];
+    [composeViewController addURL:[NSURL URLWithString:[urlString URLEncodedString]]];
   }
 
   [composeViewController setCompletionHandler:^(SLComposeViewControllerResult result) {
@@ -454,7 +457,7 @@ static NSString *const kShareOptionUrl = @"url";
            didFinishWithResult:(MFMailComposeResult)result
                          error:(NSError*)error {
   bool ok = result == MFMailComposeResultSent;
-  [self.globalMailComposer dismissViewControllerAnimated:YES completion:nil];
+  [self.globalMailComposer dismissViewControllerAnimated:YES completion:^{[self cycleTheGlobalMailComposer];}];
   CDVPluginResult * pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:ok];
   [self.commandDelegate sendPluginResult:pluginResult callbackId:_command.callbackId];
 }
@@ -529,10 +532,6 @@ static NSString *const kShareOptionUrl = @"url";
 
 - (bool)canShareViaFacebook {
   return [[UIApplication sharedApplication] canOpenURL: [NSURL URLWithString:@"fb://"]]; // requires whitelisting on iOS9
-}
-
-- (bool)canShareViaTwitter {
-  return [[UIApplication sharedApplication] canOpenURL: [NSURL URLWithString:@"twitter://"]]; // requires whitelisting on iOS9
 }
 
 // this is only an internal test method for now, can be used to open a share sheet with 'Open in xx' links for tumblr, drive, dropbox, ..
@@ -646,7 +645,7 @@ static NSString *const kShareOptionUrl = @"url";
       if ([shareString isEqual: @""]) {
         shareString = urlString;
       } else {
-        shareString = [NSString stringWithFormat:@"%@ %@", shareString, [urlString SSURLEncodedString]];
+        shareString = [NSString stringWithFormat:@"%@ %@", shareString, [urlString URLEncodedString]];
       }
     }
     NSString *encodedShareString = [shareString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -735,23 +734,8 @@ static NSString *const kShareOptionUrl = @"url";
     if ([fileName hasPrefix:@"http"]) {
       NSURL *url = [NSURL URLWithString:fileName];
       NSData *fileData = [NSData dataWithContentsOfURL:url];
-      NSURLRequest *request = [NSURLRequest requestWithURL: url];
-      NSHTTPURLResponse *response;
-      [NSURLConnection sendSynchronousRequest: request returningResponse: &response error: nil];
-      if ([response respondsToSelector:@selector(allHeaderFields)]) {
-        NSDictionary *dictionary = [response allHeaderFields];
-        NSLog([dictionary description]);
-        NSString *name = dictionary[@"Content-Disposition"];
-        if (name == nil){
-          NSString *name = (NSString*)[[fileName componentsSeparatedByString: @"/"] lastObject];
-          file = [NSURL fileURLWithPath:[self storeInFile:[name componentsSeparatedByString: @"?"][0] fileData:fileData]];
-        } else {
-          file = [NSURL fileURLWithPath:[self storeInFile:[[name componentsSeparatedByString:@"="] lastObject] fileData:fileData]];
-        }
-      } else {
-	    NSString *name = (NSString*)[[fileName componentsSeparatedByString: @"/"] lastObject];
-        file = [NSURL fileURLWithPath:[self storeInFile:[name componentsSeparatedByString: @"?"][0] fileData:fileData]];
-	  }
+      NSString *name = (NSString*)[[fileName componentsSeparatedByString: @"/"] lastObject];
+      file = [NSURL fileURLWithPath:[self storeInFile:[name componentsSeparatedByString: @"?"][0] fileData:fileData]];
     } else if ([fileName hasPrefix:@"www/"]) {
       NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
       NSString *fullPath = [NSString stringWithFormat:@"%@/%@", bundlePath, fileName];

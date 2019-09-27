@@ -7,13 +7,7 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-build-architecture": {
-      "PACKAGE_NAME": "com.abujabir.ml"
-    },
     "cordova-plugin-background-audio": {
-      "PACKAGE_NAME": "com.abujabir.ml"
-    },
-    "cordova-plugin-build-architecture": {
       "PACKAGE_NAME": "com.abujabir.ml"
     },
     "cordova-plugin-crosswalk-webview": {
@@ -26,8 +20,6 @@
       "PACKAGE_NAME": "com.abujabir.ml"
     },
     "cordova-plugin-x-socialsharing": {
-      "PHOTO_LIBRARY_ADD_USAGE_DESCRIPTION": "This app requires photo library access to function properly.",
-      "PHOTO_LIBRARY_USAGE_DESCRIPTION": "This app requires photo library access to function properly.",
       "PACKAGE_NAME": "com.abujabir.ml"
     }
   },

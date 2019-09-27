@@ -91,8 +91,6 @@ ext {
 }
 
 // PLUGIN GRADLE EXTENSIONS START
-apply from: "../cordova-build-architecture/ml-architecture.gradle"
-apply from: "../cordova-plugin-build-architecture/ml-architecture.gradle"
 apply from: "../cordova-plugin-crosswalk-webview/ml-xwalk.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 

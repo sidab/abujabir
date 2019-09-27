@@ -2,13 +2,11 @@
 
 [![NPM version][npm-image]][npm-url]
 [![Downloads][downloads-image]][npm-url]
-[![TotalDownloads][total-downloads-image]][npm-url]
 [![Twitter Follow][twitter-image]][twitter-url]
 
 [npm-image]:http://img.shields.io/npm/v/cordova-plugin-x-socialsharing.svg
 [npm-url]:https://npmjs.org/package/cordova-plugin-x-socialsharing
 [downloads-image]:http://img.shields.io/npm/dm/cordova-plugin-x-socialsharing.svg
-[total-downloads-image]:http://img.shields.io/npm/dt/cordova-plugin-x-socialsharing.svg?label=total%20downloads
 [twitter-image]:https://img.shields.io/twitter/follow/eddyverbruggen.svg?style=social&label=Follow%20me
 [twitter-url]:https://twitter.com/eddyverbruggen
 
@@ -164,18 +162,17 @@ var options = {
   subject: 'the subject', // fi. for email
   files: ['', ''], // an array of filenames either locally or remotely
   url: 'https://www.website.com/foo/#bar?a=b',
-  chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title,
-  appPackageName: 'com.apple.social.facebook' // Android only, you can provide id of the App you want to share with
-};
+  chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title
+}
 
 var onSuccess = function(result) {
   console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
-  console.log("Shared to app: " + result.app); // On Android result.app since plugin version 5.4.0 this is no longer empty. On iOS it's empty when sharing is cancelled (result.completed=false)
-};
+  console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
+}
 
 var onError = function(msg) {
   console.log("Sharing failed with message: " + msg);
-};
+}
 
 window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError);
 ```
@@ -519,7 +516,7 @@ Manually edit the .plist file - either from within Xcode or using a text editor.
 ### Use query schema plugin
 There is a plugin designed specifically to address query schema whitelisting. You can find the plugin and how to use it [here](https://www.npmjs.com/package/cordova-plugin-queries-schemes). In general, after installation, you can change plugin.xml file under the plugin subfolder within the plugins directory of your project to add the required schemas. Here again though, you have to edit an additional file and should take care not to overwrite it when making changes to your project.
 
-### Use Custom Config plugin
+### Use Custom Config strightplugin
 The Custom Config plugin ([here](https://github.com/dpa99c/cordova-custom-config)) allows you to add configuration to your platforms "native" configuration files (e.g. .plist or AndroidManifest.xml) through the project's main config.xml file.
 
 To address query schema issue, after installaing the plugin you can edit the iOS platform section of your config.xml (in the project main folder) to include the required entries:
@@ -547,13 +544,3 @@ To address query schema issue, after installaing the plugin you can edit the iOS
 ```
 
 The advantage with this method is that editing is done in the config.xml file which will most often be in your source control anyway and hence, changes to it will be reserved.
-
-## 9. NSPhotoLibraryUsageDescription on iOS
-
-This plugin requires permissions to the users photos. On iOS 10+, it is required that you provide a description for this access.
-
-The plugin configures a default description for you. If you do need to customise it, you can set a Cordova variable when installing:
-
-```
-$ cordova plugin add cordova-plugin-x-socialsharing --variable PHOTO_LIBRARY_USAGE_DESCRIPTION="This app uses your photo library" --variable PHOTO_LIBRARY_ADD_USAGE_DESCRIPTION="This app saves images your photo library"
-```
