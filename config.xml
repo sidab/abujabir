@@ -15,7 +15,7 @@
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="FadeSplashScreen" value="false" />
     <preference name="SplashScreenBackgroundColor" value="0xeeeeeeee" />
-    <preference name="phonegap-version" value="cli-8.0.0" />
+    <preference name="phonegap-version" value="cli-6.5.0" />
     <preference name="xwalkMode" value="lite" />
     <preference name="buildArchitecture" value="x86_64" />
     <preference name="xwalkMultipleApk" value="false"/>
