@@ -17,6 +17,8 @@
     <preference name="SplashScreenBackgroundColor" value="0xeeeeeeee" />
     <preference name="phonegap-version" value="cli-8.0.0" />
     <preference name="xwalk64bit" value="true" />
+    <preference name="xwalkCommandLine" value="--xwalk64bit" />
+
     <preference name="buildArchitecture" value="x86_64" />
     <preference name="xwalkMultipleApk" value="false"/>
 
@@ -73,6 +75,6 @@
     <plugin name="cordova-plugin-splashscreen" spec="~5.0.2" />
     <plugin name="cordova-plugin-background-audio" spec="1.1.0" />
     <plugin name="cordova-plugin-crosswalk-webview" spec="2.4.0"/>
-    <plugin name="cordova-build-architecture" spec="https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.3" source="git" />
+    <plugin name="cordova-build-architecture" spec="https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.4" source="git" />
     <plugin name="cordova-plugin-x-socialsharing" spec="5.4.0" />
 </widget>
