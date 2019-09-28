@@ -18,6 +18,8 @@
     <preference name="phonegap-version" value="cli-8.0.0" />
     <preference name="buildArchitecture" value="x86_64" />
     <preference name="xwalk64bit" value="true" />
+    <preference name="xwalkMultipleApk" value="false"/>
+
     <icon src="www/icon.png" />
     <platform name="ios">
         <icon height="1024" src="www/res/icon/ios/icon-1024.png" width="1024" />
