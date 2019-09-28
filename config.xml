@@ -16,9 +16,6 @@
     <preference name="FadeSplashScreen" value="false" />
     <preference name="SplashScreenBackgroundColor" value="0xeeeeeeee" />
     <preference name="phonegap-version" value="cli-8.0.0" />
-    <preference name="buildArchitecture" value="arm64" />
-    <preference name="xwalk64bit" value="true" />
-    <preference name="xwalkMultipleApk" value="false"/>
 
     <icon src="www/icon.png" />
     <platform name="ios">
