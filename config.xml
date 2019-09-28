@@ -18,6 +18,7 @@
     <preference name="phonegap-version" value="cli-8.0.0" />
     <preference name="xwalk64bit" value="false" />
     <preference name="xwalkMultipleApk" value="false"/>
+    <preference name="xwalkMode" value="lite" />
 
     <icon src="www/icon.png" />
     <platform name="ios">
