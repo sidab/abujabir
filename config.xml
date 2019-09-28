@@ -15,9 +15,8 @@
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="FadeSplashScreen" value="false" />
     <preference name="SplashScreenBackgroundColor" value="0xeeeeeeee" />
-    <preference name="phonegap-version" value="cli-9.0.0" />
-    <preference name="xwalk64bit" value="true" />
-    <preference name="xwalkMultipleApk" value="false"/>
+    <preference name="phonegap-version" value="cli-8.0.0" />
+    <preference name="xwalkMode" value="lite" />
 
     <icon src="www/icon.png" />
     <platform name="ios">
@@ -73,5 +72,4 @@
     <plugin name="cordova-plugin-background-audio" spec="1.1.0" />
     <plugin name="cordova-plugin-crosswalk-webview" spec="2.2.0" />
     <plugin name="cordova-plugin-x-socialsharing" spec="5.4.0" />
-    <plugin name="cordova-android-support-gradle-release"/>
 </widget>
