@@ -183,6 +183,7 @@ var app = new Framework7({
           audioElDom7.attr('src', src);
 
           playing = false;
+          first1 = true;
 
           audioEl.load();
 
@@ -531,7 +532,7 @@ toolbarPlayer.on('click', function (e) {
 
 });
 
-audioElDom7.on('loadedmetadata', function () {
+app.on('audio:loadedmetadata', function () {
 
   var latest = JSON.parse(localStorage.latest);
 
@@ -598,6 +599,13 @@ audioElDom7.on('loadedmetadata', function () {
 
   });
 
+  sheetPlayer.$el.find('.preloader').addClass('display-none');
+  sheetPlayer.$el.find('.page-content').removeClass('disabled');
+
+});
+
+audioElDom7.on('loadedmetadata', function () {
+
   audioElDom7.once('canplay', function () {
 
     if (firstPlay && localStorage.latest !== undefined) {
@@ -627,8 +635,19 @@ audioElDom7.on('timeupdate', function () {
 
   if (playing) {
 
-    sheetPlayer.$el.find('.preloader').addClass('display-none');
-    sheetPlayer.$el.find('.page-content').removeClass('disabled');
+    app.emit('audio:playing');
+
+  }
+
+  playing = true;
+
+});
+
+app.on('audio:playing', function () {
+
+  if (first1) {
+
+    app.emit('audio:loadedmetadata');
 
   }
 
@@ -681,13 +700,3 @@ audioElDom7.on('pause', function () {
   toolbarPlayer.find('.pause').addClass('display-none');
 
 });
-
-window.addEventListener("error", handleError, true);
-
-function handleError(evt) {
-  if (evt.message) { // Chrome sometimes provides this
-    alert("error: "+evt.message +" at linenumber: "+evt.lineno+" of file: "+evt.filename);
-  } else {
-    alert("error: "+evt.type+" from element: "+(evt.srcElement || evt.target));
-  }
-}
