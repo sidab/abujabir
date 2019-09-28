@@ -5,8 +5,7 @@
   "cordova": {
     "platforms": [
       "browser",
-      "ios",
-      "android"
+      "ios"
     ],
     "plugins": {
       "cordova-plugin-whitelist": {},
@@ -15,13 +14,10 @@
       "cordova-plugin-build-architecture": {},
       "cordova-plugin-crosswalk-webview": {},
       "cordova-build-architecture": {},
-      "cordova-plugin-x-socialsharing": {
-        "ANDROID_SUPPORT_V4_VERSION": "24.1.1+"
-      }
+      "cordova-plugin-x-socialsharing": {}
     }
   },
   "dependencies": {
-    "cordova-android": "^7.1.4",
     "cordova-browser": "^5.0.4",
     "cordova-build-architecture": "https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.4",
     "cordova-ios": "^4.5.5",
@@ -30,6 +26,7 @@
     "cordova-plugin-crosswalk-webview": "2.4.0",
     "cordova-plugin-splashscreen": "~5.0.2",
     "cordova-plugin-whitelist": "~1.3.3",
-    "cordova-plugin-x-socialsharing": "5.4.7"
+    "cordova-plugin-x-socialsharing": "5.4.0",
+    "es6-promise-plugin": "4.2.2"
   }
 }
