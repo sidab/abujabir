@@ -23,20 +23,6 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-crosswalk-webview": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-crosswalk-webview@2.4.0"
-    },
-    "is_top_level": true,
-    "variables": {
-      "XWALK_VERSION": "23+",
-      "XWALK_LITEVERSION": "xwalk_core_library_canary:17+",
-      "XWALK_COMMANDLINE": "--disable-pull-to-refresh-effect",
-      "XWALK_MODE": "embedded",
-      "XWALK_MULTIPLEAPK": "true"
-    }
-  },
   "es6-promise-plugin": {
     "source": {
       "type": "registry",
@@ -49,6 +35,32 @@
     "source": {
       "type": "registry",
       "id": "cordova-plugin-x-socialsharing@5.4.0"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-android-support-gradle-release": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-android-support-gradle-release"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-crosswalk-webview": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-crosswalk-webview@2.4.0"
+    },
+    "is_top_level": true,
+    "variables": {
+      "XWALK_MODE": "lite"
+    }
+  },
+  "cordova-build-architecture": {
+    "source": {
+      "type": "registry",
+      "id": "https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.4"
     },
     "is_top_level": true,
     "variables": {}
