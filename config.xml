@@ -70,9 +70,7 @@
     <plugin name="cordova-plugin-splashscreen" spec="~5.0.2" />
     <plugin name="cordova-plugin-background-audio" spec="1.1.0" />
     <plugin name="cordova-plugin-x-socialsharing" spec="5.4.0" />
-    <plugin name="cordova-android-support-gradle-release" spec="3.0.1">
-        <variable name="ANDROID_SUPPORT_VERSION" value="27.+" />
-    </plugin>
+
     <plugin name="cordova-plugin-crosswalk-webview" spec="2.4.0">
         <variable name="XWALK_MODE" value="lite" />
         <variable name="XWALK_VERSION" value="23+" />
