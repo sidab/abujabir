@@ -71,14 +71,7 @@
     <plugin name="cordova-plugin-background-audio" spec="1.1.0" />
     <plugin name="cordova-plugin-x-socialsharing" spec="5.4.0" />
 
-    <plugin name="cordova-plugin-crosswalk-webview" spec="2.4.0">
-        <variable name="XWALK_MODE" value="lite" />
-        <variable name="XWALK_VERSION" value="23+" />
-        <variable name="XWALK_LITEVERSION" value="xwalk_core_library_canary:17+" />
-        <variable name="XWALK_COMMANDLINE" value="--disable-pull-to-refresh-effect" />
-        <variable name="XWALK_MULTIPLEAPK" value="true" />
-        <preference name="XWALK64BIT" value="true" />
-    </plugin>
+    <plugin name="cordova-plugin-crosswalk-webview" spec="2.4.0"/>
     <plugin name="cordova-build-architecture" spec="https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.4" />
     <preference name="buildArchitecture" value="arm64" />
     <engine name="android" spec="^8.1.0" />
