@@ -25,4 +25,6 @@
     <preference name="xwalkMultipleApk" value="true" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#007aff" />
+    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
+    <preference name="InterceptRemoteRequests" value="all" />
 </widget>

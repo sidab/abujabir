@@ -4,17 +4,16 @@
         <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="StatusBar">
+        <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
+        <param name="onload" value="true" />
+    </feature>
     <feature name="Whitelist">
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
     <feature name="SocialSharing">
         <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
-    </feature>
-    <preference default="arm" name="buildArchitecture" />
-    <feature name="StatusBar">
-        <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
-        <param name="onload" value="true" />
     </feature>
     <name>Единобожие - Вероубеждение</name>
     <description>
@@ -43,7 +42,7 @@
     <preference name="xwalkVersion" value="23+" />
     <preference name="xwalkLiteVersion" value="xwalk_core_library_canary:17+" />
     <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
-    <preference name="xwalkMode" value="lite" />
+    <preference name="xwalkMode" value="embedded" />
     <preference name="android-minSdkVersion" value="19" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="fullscreen" value="false" />
@@ -59,6 +58,8 @@
     <preference name="xwalkMultipleApk" value="true" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#007aff" />
+    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
+    <preference name="InterceptRemoteRequests" value="all" />
     <preference name="SplashMaintainAspectRatio" value="true" />
     <preference name="SplashShowOnlyFirstTime" value="true" />
 </widget>

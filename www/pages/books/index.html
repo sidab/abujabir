@@ -6,30 +6,34 @@
 
             <div class="block-title block-title-large text-color-white">Единобожие - Вероубеждение</div>
 
-            <div class="books">
+            <div class="margin books">
 
-                <div class="books-inner">
+                <div class="swiper-container">
 
-                    {{#each books}}
+                    <div class="swiper-wrapper">
 
-                        <div data-id="{{id}}" style="background-image: url({{Фон}})" class="book elevation-5 padding">
+                        {{#each books}}
 
-                            <div class="book-inner">
+                            <div data-id="{{id}}" style="background-image: url({{Фон}})" class="swiper-slide book elevation-5 padding">
 
-                                <div class="book-title text-color-white margin-bottom">{{Название}}</div>
-                                <div class="book-author text-color-white">{{Автор}}</div>
+                                <div class="book-inner">
+
+                                    <div class="book-title text-color-white margin-bottom">{{Название}}</div>
+                                    <div class="book-author text-color-white">{{Автор}}</div>
+
+                                </div>
 
                             </div>
 
-                        </div>
+                        {{/each}}
 
-                    {{/each}}
+                        <div data-id="favorites" style="background-image: url(img/favorites.jpg)" class="swiper-slide book elevation-5 padding">
 
-                    <div data-id="favorites" style="background-image: url(img/favorites.jpg)" class="book elevation-5 padding">
+                            <div class="book-inner">
 
-                        <div class="book-inner">
+                                <div class="book-title text-color-white margin-bottom">Избранные</div>
 
-                            <div class="book-title text-color-white margin-bottom">Избранные</div>
+                            </div>
 
                         </div>
 
@@ -65,16 +69,7 @@
         height: 100%;
     }
 
-    .books-inner {
-        overflow-x: scroll;
-        overflow-y: hidden;
-        white-space: nowrap;
-        padding-left: 20px;
-        height: 100%;
-    }
-
     .book {
-        display: inline-block;
         width: 250px;
         height: 330px;
         border: 1px solid;
@@ -136,6 +131,14 @@
 
                     app.views.current.router.navigate('/book/' + id);
 
+                });
+
+                var swiper = new Swiper('.swiper-container', {
+                    slidesPerView: 'auto',
+                    centeredSlides: false,
+                    spaceBetween: 0,
+                    width: 250,
+                    cssMode: true
                 });
 
             }
