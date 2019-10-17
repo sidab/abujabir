@@ -22,6 +22,11 @@
     <preference name="xwalkMultipleApk" value="true" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#007aff" />
+    <feature name="CDVWKWebViewEngine">
+        <param name="ios-package" value="CDVWKWebViewEngine" />
+    </feature>
+    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
+    <preference name="InterceptRemoteRequests" value="all" />
     <icon src="www/icon.png" />
     <platform name="ios">
         <icon height="1024" src="www/res/icon/ios/icon-1024.png" width="1024" />
