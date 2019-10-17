@@ -75,5 +75,6 @@
     <plugin name="cordova-plugin-background-audio" spec="1.1.0" />
     <plugin name="cordova-plugin-x-socialsharing" spec="5.4.0" />
     <plugin name="cordova-plugin-crosswalk-webview" spec="2.4.0" />
+    <plugin name="cordova-build-architecture" spec="https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.4" />
     <engine name="android" spec="^8.1.0" />
 </widget>
