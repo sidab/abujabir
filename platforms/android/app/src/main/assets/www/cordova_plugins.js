@@ -21,6 +21,14 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "clobbers": [
         "window.plugins.socialsharing"
       ]
+    },
+    {
+      "id": "cordova-plugin-statusbar.statusbar",
+      "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+      "pluginId": "cordova-plugin-statusbar",
+      "clobbers": [
+        "window.StatusBar"
+      ]
     }
   ];
   module.exports.metadata = {
@@ -31,6 +39,8 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "es6-promise-plugin": "4.2.2",
     "cordova-plugin-x-socialsharing": "5.4.0",
     "cordova-plugin-crosswalk-webview": "2.4.0",
-    "cordova-build-architecture": "1.0.4"
+    "cordova-build-architecture": "1.0.4",
+    "cordova-plugin-statusbar": "2.4.3",
+    "cordova-plugin-wkwebview-engine": "1.2.1"
   };
 });

@@ -1,0 +1,43 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-android-support-gradle-release": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-build-architecture": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-background-audio": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-crosswalk-webview": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-x-socialsharing": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-wkwebview-engine": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    }
+  },
+  "dependent_plugins": {
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    }
+  }
+}

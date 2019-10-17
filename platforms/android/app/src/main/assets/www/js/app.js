@@ -7,7 +7,7 @@ var app = new Framework7({
   root: '#app',
   name: 'Абу Джабир',
   theme: 'ios',
-  version: 5.3,
+  version: 5.7,
   routes: routes,
   backend: 'https://abujabir.ru/new/',
   touch: {
@@ -18,9 +18,11 @@ var app = new Framework7({
     fastClicks: true
   },
   view: {
-    animate: false,
+    //animate: false,
     iosDynamicNavbar: false,
-    stackPages: true
+    stackPages: true,
+    preloadPreviousPage: false,
+    removeElements: false
   },
   dialog: {
     buttonCancel: 'Отмена',
@@ -430,7 +432,7 @@ var app = new Framework7({
 
       sheetPlayer = app.sheet.create({
         el: '.sheet-player',
-        swipeToClose: false,
+        swipeToClose: true,
         backdrop: true,
         closeByOutsideClick: true,
         closeByBackdropClick: true
@@ -501,18 +503,18 @@ app.request.setup({
   }
 });
 
-app.views.create('.view-main', {
-  url: '/books',
-  main: true
-});
-
 $$(document).on('deviceready', function () {
+
+    app.views.create('.view-main', {
+      url: '/books',
+      main: true
+    });
 
     setTimeout(function () {
 
       navigator.splashscreen.hide();
 
-    }, 1000);
+    }, 500);
 
     $$(document).on('backbutton', function(event) {
 

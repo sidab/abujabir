@@ -61,6 +61,7 @@ html, body {
     z-index: 9999;
     font-size: 18px;
     --f7-toolbar-height: 70px;
+    background: #f7f7f8 !important;
 }
 
 .toolbar-player .row {
@@ -81,4 +82,5 @@ html, body {
     font-size: 35px;
     height: 70px;
     line-height: 70px;
+    width: 100%;
 }

@@ -1,0 +1,98 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-android-support-gradle-release": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-build-architecture": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-background-audio": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-crosswalk-webview": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-x-socialsharing": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-wkwebview-engine": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    }
+  },
+  "dependent_plugins": {},
+  "modules": [
+    {
+      "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+      "id": "cordova-plugin-splashscreen.SplashScreen",
+      "pluginId": "cordova-plugin-splashscreen",
+      "clobbers": [
+        "navigator.splashscreen"
+      ]
+    },
+    {
+      "file": "plugins/cordova-plugin-splashscreen/src/browser/SplashScreenProxy.js",
+      "id": "cordova-plugin-splashscreen.SplashScreenProxy",
+      "pluginId": "cordova-plugin-splashscreen",
+      "runs": true
+    },
+    {
+      "file": "plugins/es6-promise-plugin/www/promise.js",
+      "id": "es6-promise-plugin.Promise",
+      "pluginId": "es6-promise-plugin",
+      "runs": true
+    },
+    {
+      "file": "plugins/cordova-plugin-x-socialsharing/www/SocialSharing.js",
+      "id": "cordova-plugin-x-socialsharing.SocialSharing",
+      "pluginId": "cordova-plugin-x-socialsharing",
+      "clobbers": [
+        "window.plugins.socialsharing"
+      ]
+    },
+    {
+      "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+      "id": "cordova-plugin-statusbar.statusbar",
+      "pluginId": "cordova-plugin-statusbar",
+      "clobbers": [
+        "window.StatusBar"
+      ]
+    },
+    {
+      "file": "plugins/cordova-plugin-statusbar/src/browser/StatusBarProxy.js",
+      "id": "cordova-plugin-statusbar.StatusBarProxy",
+      "pluginId": "cordova-plugin-statusbar",
+      "runs": true
+    }
+  ],
+  "plugin_metadata": {
+    "cordova-android-support-gradle-release": "3.0.1",
+    "cordova-build-architecture": "1.0.4",
+    "cordova-plugin-background-audio": "1.0.0",
+    "cordova-plugin-crosswalk-webview": "2.4.0",
+    "cordova-plugin-splashscreen": "5.0.2",
+    "cordova-plugin-whitelist": "1.3.3",
+    "es6-promise-plugin": "4.2.2",
+    "cordova-plugin-x-socialsharing": "5.4.0",
+    "cordova-plugin-statusbar": "2.4.3",
+    "cordova-plugin-wkwebview-engine": "1.2.1"
+  }
+}

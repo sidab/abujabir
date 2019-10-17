@@ -33,6 +33,12 @@
     },
     "cordova-build-architecture": {
       "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-wkwebview-engine": {
+      "PACKAGE_NAME": "com.abujabir.ml"
     }
   },
   "dependent_plugins": {
