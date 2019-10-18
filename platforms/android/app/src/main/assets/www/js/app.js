@@ -7,7 +7,7 @@ var app = new Framework7({
   root: '#app',
   name: 'Абу Джабир',
   theme: 'ios',
-  version: 5.7,
+  version: 5.9,
   routes: routes,
   backend: 'https://abujabir.ru/new/',
   touch: {
@@ -100,52 +100,67 @@ var app = new Framework7({
       app.views.current.router.back();
 
     },
-    books: function (id) {
+    books: function (id, callback) {
 
       var app = this;
 
       if (localStorage.books == undefined || Number(localStorage.version) !== app.version) {
 
-        app.methods.loadData();
+        app.methods.loadData(function (books) {
 
-      }
+          if (callback !== undefined) {
 
-      var books = JSON.parse(localStorage.books);
+            callback(books);
 
-      if (id) {
+          }
 
-        if (id == 'favorites') {
+        });
 
-          if (localStorage.favorites !== undefined && JSON.parse(localStorage.favorites).length !== 0) {
+      } else {
 
-            var favorites = {
-              "Аудио": JSON.parse(localStorage.favorites)
-            };
+        var books = JSON.parse(localStorage.books);
 
-            return favorites;
+        if (callback !== undefined) {
+
+          callback(books);
+
+        }
+
+        if (id) {
+
+          if (id == 'favorites') {
+
+            if (localStorage.favorites !== undefined && JSON.parse(localStorage.favorites).length !== 0) {
+
+              var favorites = {
+                "Аудио": JSON.parse(localStorage.favorites)
+              };
+
+              return favorites;
+
+            } else {
+
+              return false;
+
+            }
 
           } else {
 
-            return false;
+            var book = books.filter(function (book) {
+
+              return book.id == id;
+
+            })[0];
+
+            return book;
 
           }
 
         } else {
 
-          var book = books.filter(function (book) {
-
-            return book.id == id;
-
-          })[0];
-
-          return book;
+          return books;
 
         }
-
-
-      } else {
-
-        return books;
 
       }
 
@@ -155,7 +170,8 @@ var app = new Framework7({
 
         if (app !== undefined) {
 
-          sheetPlayer.$el.find('.preloader').removeClass('display-none');
+          sheetPlayer.$el.find('.preloader-block').removeClass('display-none');
+          sheetPlayer.$el.find('.sheet-modal-inner').addClass('display-none');
           sheetPlayer.$el.find('.page-content').addClass('disabled');
 
           if(!sheetPlayer.opened) {
@@ -349,13 +365,18 @@ var app = new Framework7({
 
       }
     },
-    loadData: function() {
+    loadData: function(callback) {
 
       app.request({
         url: app.params.backend + '/data.json',
         dataType: 'json',
-        async: false,
         success: function (data) {
+
+          if (callback !== undefined) {
+
+            callback(data.Книги);
+
+          }
 
           localStorage.books = JSON.stringify(data.Книги);
           localStorage.version = app.version;
@@ -369,7 +390,7 @@ var app = new Framework7({
       var app = this;
 
       app.request({
-        url: encodeURI('https://goldproekt.com/api/abujabir'),
+        url: encodeURI('https://salvion.ru/api/abujabir'),
         cache: false,
         dataType: 'json',
         success: function (response) {
@@ -424,72 +445,9 @@ var app = new Framework7({
   on: {
     init: function () {
 
-      app = this;
-
-      app.methods.checkVersion();
-
-      toolbarPlayer = $$('.toolbar-player');
-
-      sheetPlayer = app.sheet.create({
-        el: '.sheet-player',
-        swipeToClose: true,
-        backdrop: true,
-        closeByOutsideClick: true,
-        closeByBackdropClick: true
-      });
-
-      audioRange = app.range.create({
-        el: sheetPlayer.$el.find('.range-audio'),
-        label: false,
-        min: 0,
-        on: {
-          change: function (range, value) {
-
-            var currentTimeMinutes = Math.floor(audioEl.currentTime / 60).toLocaleString('en-US', {
-              minimumIntegerDigits: 2,
-              useGrouping: false
-            });
-
-            var currentTimeSeconds = (Math.floor(audioEl.currentTime) - currentTimeMinutes * 60).toLocaleString('en-US', {
-              minimumIntegerDigits: 2,
-              useGrouping: false
-            });
-
-            var currentTime = currentTimeMinutes + ':' + currentTimeSeconds;
-
-            sheetPlayer.$el.find('.current-time').html(currentTime);
-
-            if (change) {
-
-              audioEl.currentTime = value;
-
-            }
-
-          }
-        }
-      });
-
-      firstPlay = false;
-      latestTime = 0;
-
-      if (localStorage.latest !== undefined) {
-
-        firstPlay = true;
-
-        var latest = JSON.parse(localStorage.latest);
-
-        latestTime = latest.time;
-
-        setTimeout(function () {
-
-          app.methods.player.play(latest);
-
-        }, 100);
-
-      }
-
     }
   }
+
 }).init();
 
 app.request.setup({
@@ -498,207 +456,293 @@ app.request.setup({
   },
   complete: function(xhr) {
 
-    //console.log(xhr);
+    console.log(xhr);
 
   }
 });
 
 $$(document).on('deviceready', function () {
 
-    app.views.create('.view-main', {
-      url: '/books',
-      main: true
-    });
+  app.methods.checkVersion();
 
-    setTimeout(function () {
-
-      navigator.splashscreen.hide();
-
-    }, 500);
-
-    $$(document).on('backbutton', function(event) {
-
-      app.methods.backButton();
-
-    });
-
-});
-
-toolbarPlayer.on('click', function (e) {
-
-  if(!$$(e.target).hasClass('icon')) {
-
-    sheetPlayer.open();
-
-  }
-
-});
-
-app.on('audio:loadedmetadata', function () {
-
-  var latest = JSON.parse(localStorage.latest);
-
-  sheetPlayer.$el.find('.audio-title').html(latest.title);
-
-  if (latest.title.length > 20 && latest.title.length < 40) {
-
-    sheetPlayer.$el.find('.audio-title').addClass('audio-title-medium');
-
-  } else if (latest.title.length >= 40) {
-
-    sheetPlayer.$el.find('.audio-title').addClass('audio-title-small');
-
-  } else {
-
-    sheetPlayer.$el.find('.audio-title').removeClass('audio-title-medium');
-    sheetPlayer.$el.find('.audio-title').removeClass('audio-title-small');
-
-  }
-
-  sheetPlayer.$el.find('.audio-author').html(latest.author);
-
-  toolbarPlayer.removeClass('display-none');
-  toolbarPlayer.find('.audio-title').html(latest.title);
-
-  audioRange.max = audioEl.duration.toFixed(0);
-
-  var durationMinutes = Math.floor(audioEl.duration / 60).toLocaleString('en-US', {
-    minimumIntegerDigits: 2,
-    useGrouping: false
+  app.views.create('.view-main', {
+    url: '/books',
+    main: true
   });
 
-  var durationSeconds = (Math.floor(audioEl.duration) - durationMinutes * 60).toLocaleString('en-US', {
-    minimumIntegerDigits: 2,
-    useGrouping: false
+  toolbarPlayer = $$('.toolbar-player');
+
+  sheetPlayer = app.sheet.create({
+    el: '.sheet-player',
+    swipeToClose: true,
+    backdrop: true,
+    closeByOutsideClick: true,
+    closeByBackdropClick: true
   });
 
-  var duration = durationMinutes + ':' + durationSeconds;
+  sheetPlayer.open();
 
-  sheetPlayer.$el.find('.duration').html(duration);
+  setTimeout(function () {
 
-  sheetPlayer.$el.find('.share-button').off('click').on('click', function () {
+    sheetPlayer.close();
 
-    app.request({
-      url: encodeURI('https://abujabir.ru/s.php?url=' + audioElDom7.attr('src')),
-      success: function (response) {
+  });
 
-        var appDownloadUrl;
+  audioRange = app.range.create({
+    el: sheetPlayer.$el.find('.range-audio'),
+    label: false,
+    step: 0.0001,
+    min: 0,
+    value: 0,
+    on: {
+      change: function (range, value) {
 
-        if (app.device.ios) {
+        var currentTimeMinutes = Math.floor(audioEl.currentTime / 60).toLocaleString('en-US', {
+          minimumIntegerDigits: 2,
+          useGrouping: false
+        });
 
-          appDownloadUrl = 'https://abujabir.ru/s/f0a144';
+        var currentTimeSeconds = (Math.floor(audioEl.currentTime) - currentTimeMinutes * 60).toLocaleString('en-US', {
+          minimumIntegerDigits: 2,
+          useGrouping: false
+        });
 
-        } else {
+        var currentTime = currentTimeMinutes + ':' + currentTimeSeconds;
 
-          appDownloadUrl = 'https://abujabir.ru/s/ee6804';
+        sheetPlayer.$el.find('.current-time').html(currentTime);
+
+        if (change) {
+
+          audioEl.currentTime = value;
 
         }
 
-        window.plugins.socialsharing.share(latest.title + ' 🎧⬇️ ' + "\r\n" + response + "\r\n\r\n" + 'Скачай приложение📱⬇️' + "\r\n" + appDownloadUrl);
-
       }
-    });
-
+    }
   });
 
-  sheetPlayer.$el.find('.preloader').addClass('display-none');
-  sheetPlayer.$el.find('.page-content').removeClass('disabled');
+  firstPlay = false;
+  latestTime = 0;
 
-});
+  console.log(localStorage.latest);
 
-audioElDom7.on('loadedmetadata', function () {
+  if (localStorage.latest !== undefined) {
 
-  audioElDom7.once('canplay', function () {
+    firstPlay = true;
 
-    if (firstPlay && localStorage.latest !== undefined) {
+    var latest = JSON.parse(localStorage.latest);
 
-      sheetPlayer.$el.find('.preloader').addClass('display-none');
-      sheetPlayer.$el.find('.page-content').removeClass('disabled');
+    if (latest.time !== undefined) {
 
-      setTimeout(function () {
+      latestTime = latest.time;
 
-        audioEl.currentTime = latestTime;
+    }
 
-      });
+    setTimeout(function () {
 
-      firstPlay = false;
+      app.methods.player.play(latest);
 
-    } else {
+    });
 
-      audioEl.play();
+  }
+
+  toolbarPlayer.on('click', function (e) {
+
+    if(!$$(e.target).hasClass('icon')) {
+
+      sheetPlayer.open();
 
     }
 
   });
 
-});
+  setTimeout(function () {
 
-audioElDom7.on('timeupdate', function () {
+    navigator.splashscreen.hide();
 
-  if (playing) {
+  }, 100);
 
-    app.emit('audio:playing');
+  app.on('audio:loadedmetadata', function () {
 
-  }
+    first1 = false;
 
-  playing = true;
+    var latest = JSON.parse(localStorage.latest);
 
-});
+    sheetPlayer.$el.find('.audio-title').html(latest.title);
 
-app.on('audio:playing', function () {
+    if (latest.title.length > 20 && latest.title.length < 40) {
 
-  if (first1) {
+      sheetPlayer.$el.find('.audio-title').addClass('audio-title-medium');
 
-    app.emit('audio:loadedmetadata');
+    } else if (latest.title.length >= 40) {
 
-  }
+      sheetPlayer.$el.find('.audio-title').addClass('audio-title-small');
 
-  playing = true;
+    } else {
 
-  var latest = JSON.parse(localStorage.latest);
+      sheetPlayer.$el.find('.audio-title').removeClass('audio-title-medium');
+      sheetPlayer.$el.find('.audio-title').removeClass('audio-title-small');
 
-  var currentTimeMinutes = Math.floor(audioEl.currentTime / 60).toLocaleString('en-US', {
-    minimumIntegerDigits: 2,
-    useGrouping: false
+    }
+
+    sheetPlayer.$el.find('.audio-author').html(latest.author);
+
+    toolbarPlayer.removeClass('display-none');
+    toolbarPlayer.find('.audio-title').html(latest.title);
+
+    audioRange.max = Number(audioEl.duration.toFixed(0));
+
+    var durationMinutes = Math.floor(audioEl.duration / 60).toLocaleString('en-US', {
+      minimumIntegerDigits: 2,
+      useGrouping: false
+    });
+
+    var durationSeconds = (Math.floor(audioEl.duration) - durationMinutes * 60).toLocaleString('en-US', {
+      minimumIntegerDigits: 2,
+      useGrouping: false
+    });
+
+    var duration = durationMinutes + ':' + durationSeconds;
+
+    sheetPlayer.$el.find('.duration').html(duration);
+
+    sheetPlayer.$el.find('.share-button').off('click').on('click', function () {
+
+      app.request({
+        url: encodeURI('https://abujabir.ru/s.php?url=' + audioElDom7.attr('src')),
+        success: function (response) {
+
+          var appDownloadUrl;
+
+          if (app.device.ios) {
+
+            appDownloadUrl = 'https://abujabir.ru/s/f0a144';
+
+          } else {
+
+            appDownloadUrl = 'https://abujabir.ru/s/ee6804';
+
+          }
+
+          window.plugins.socialsharing.share(latest.title + ' 🎧⬇️ ' + "\r\n" + response + "\r\n\r\n" + 'Скачай приложение📱⬇️' + "\r\n" + appDownloadUrl);
+
+        }
+      });
+
+    });
+
+    sheetPlayer.$el.find('.preloader-block').addClass('display-none');
+    sheetPlayer.$el.find('.sheet-modal-inner').removeClass('display-none');
+    sheetPlayer.$el.find('.page-content').removeClass('disabled');
+
   });
 
-  var currentTimeSeconds = (Math.floor(audioEl.currentTime) - currentTimeMinutes * 60).toLocaleString('en-US', {
-    minimumIntegerDigits: 2,
-    useGrouping: false
+  audioElDom7.on('loadedmetadata', function () {
+
+    audioElDom7.once('canplay', function () {
+
+      if (firstPlay && localStorage.latest !== undefined) {
+
+        app.emit('audio:loadedmetadata');
+
+        if (latestTime !== undefined) {
+
+          audioEl.currentTime = 0;
+
+          setTimeout(function () {
+
+            audioEl.currentTime = latestTime;
+
+          });
+
+        }
+
+        firstPlay = false;
+
+      } else {
+
+        audioEl.play();
+
+      }
+
+    });
+
   });
 
-  var currentTime = currentTimeMinutes + ':' + currentTimeSeconds;
+  audioElDom7.on('timeupdate', function () {
 
-  sheetPlayer.$el.find('.current-time').html(currentTime);
+    if (playing) {
 
-  change = false;
+      app.emit('audio:playing');
 
-  latest.time = audioEl.currentTime;
+    }
 
-  localStorage.latest = JSON.stringify(latest);
+    playing = true;
 
-  audioRange.setValue(audioEl.currentTime);
+  });
 
-  change = true;
+  app.on('audio:playing', function () {
 
-});
+    if (first1) {
 
-audioElDom7.on('playing', function () {
+      app.emit('audio:loadedmetadata');
 
-  sheetPlayer.$el.find('.resume').addClass('display-none');
-  sheetPlayer.$el.find('.pause').removeClass('display-none');
+    }
 
-  toolbarPlayer.find('.resume').addClass('display-none');
-  toolbarPlayer.find('.pause').removeClass('display-none');
+    playing = true;
 
-});
+    var latest = JSON.parse(localStorage.latest);
 
-audioElDom7.on('pause', function () {
+    var currentTimeMinutes = Math.floor(audioEl.currentTime / 60).toLocaleString('en-US', {
+      minimumIntegerDigits: 2,
+      useGrouping: false
+    });
 
-  sheetPlayer.$el.find('.resume').removeClass('display-none');
-  sheetPlayer.$el.find('.pause').addClass('display-none');
+    var currentTimeSeconds = (Math.floor(audioEl.currentTime) - currentTimeMinutes * 60).toLocaleString('en-US', {
+      minimumIntegerDigits: 2,
+      useGrouping: false
+    });
 
-  toolbarPlayer.find('.resume').removeClass('display-none');
-  toolbarPlayer.find('.pause').addClass('display-none');
+    var currentTime = currentTimeMinutes + ':' + currentTimeSeconds;
+
+    sheetPlayer.$el.find('.current-time').html(currentTime);
+
+    change = false;
+
+    latest.time = audioEl.currentTime;
+
+    localStorage.latest = JSON.stringify(latest);
+
+    audioRange.setValue(audioEl.currentTime);
+
+    change = true;
+
+  });
+
+  audioElDom7.on('playing', function () {
+
+    sheetPlayer.$el.find('.resume').addClass('display-none');
+    sheetPlayer.$el.find('.pause').removeClass('display-none');
+
+    toolbarPlayer.find('.resume').addClass('display-none');
+    toolbarPlayer.find('.pause').removeClass('display-none');
+
+  });
+
+  audioElDom7.on('pause', function () {
+
+    sheetPlayer.$el.find('.resume').removeClass('display-none');
+    sheetPlayer.$el.find('.pause').addClass('display-none');
+
+    toolbarPlayer.find('.resume').removeClass('display-none');
+    toolbarPlayer.find('.pause').addClass('display-none');
+
+  });
+
+  $$(document).on('backbutton', function(event) {
+
+    app.methods.backButton();
+
+  });
 
 });

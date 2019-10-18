@@ -30,6 +30,9 @@
     },
     "cordova-plugin-x-socialsharing": {
       "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-wkwebview-file-xhr": {
+      "PACKAGE_NAME": "com.abujabir.ml"
     }
   },
   "dependent_plugins": {

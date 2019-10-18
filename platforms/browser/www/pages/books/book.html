@@ -90,7 +90,7 @@
 
                                                 <i class="icon f7-icons download">download</i>
                                                 <i class="icon f7-icons downloaded text-color-green display-none">check_round_fill</i>
-                                                <div class="gauge gauge-progress"></div>
+                                                <div class="gauge gauge-progress display-none"></div>
                                                 <i class="icon f7-icons favorite add-to-favorite">star</i>
                                                 <i class="icon f7-icons favorite display-none remove-from-favorite text-color-orange">star_fill</i>
 
@@ -160,7 +160,7 @@
 
                                                                     <i class="icon f7-icons download">download</i>
                                                                     <i class="icon f7-icons downloaded text-color-green display-none">check_round_fill</i>
-                                                                    <div class="gauge gauge-progress"></div>
+                                                                    <div class="gauge gauge-progress display-none"></div>
                                                                     <i class="icon f7-icons favorite add-to-favorite">star</i>
                                                                     <i class="icon f7-icons favorite display-none remove-from-favorite text-color-orange">star_fill</i>
 
@@ -227,6 +227,7 @@
 
     .gauge-progress {
         height: 35px;
+        width: 35px
     }
 
     .duration {
@@ -238,6 +239,9 @@
         white-space: normal;
     }
 
+    .gauge-progress .preloader {
+        top: 7px;
+    }
 </style>
 
 <script>
@@ -249,33 +253,7 @@
             var id = this.$route.params.id;
 
             return {
-                book: app.methods.books(id),
-                bookl: function () {
-
-                    if (id == 'favorites') {
-
-                        if (localStorage.favorites !== undefined && JSON.parse(localStorage.favorites).length !== 0) {
-
-                            var favorites = {"Аудио": []};
-
-                            favorites.push(JSON.parse(localStorage.favorites));
-
-                            console.log(favorites)
-                            return favorites;
-
-                        } else {
-
-                            return false;
-
-                        }
-
-                    } else {
-
-                       return app.methods.books(id);
-
-                    }
-
-                }
+                book: app.methods.books(id)
             };
 
         },
@@ -354,6 +332,8 @@
 
                         var gaugeEl = $this.find('.gauge');
 
+                        gaugeEl.removeClass('display-none');
+
                         var gauge = app.gauge.create({
                             el: gaugeEl,
                             type: 'circle',
@@ -383,11 +363,25 @@
                             xhrFields: {
                                 responseType: 'blob'
                             },
+                            beforeSend: function () {
+
+                                if (app.device.ios) {
+
+                                    var preloader = '<div class="preloader"> <span class="preloader-inner"> <span class="preloader-inner-line"></span> <span class="preloader-inner-line"></span> <span class="preloader-inner-line"></span> <span class="preloader-inner-line"></span> <span class="preloader-inner-line"></span> <span class="preloader-inner-line"></span> <span class="preloader-inner-line"></span> <span class="preloader-inner-line"></span> <span class="preloader-inner-line"></span> <span class="preloader-inner-line"></span> <span class="preloader-inner-line"></span> <span class="preloader-inner-line"></span> </span> </div>';
+
+                                    gaugeEl.html(preloader);
+
+                                }
+
+                            },
                             success: function (blob) {
 
                                 localforage.setItem(url, blob).then(function () {
 
+                                    gaugeEl.addClass('display-none');
+
                                     $this.find('.downloaded').removeClass('display-none');
+
                                     gauge.destroy();
 
                                 });

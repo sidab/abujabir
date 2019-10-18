@@ -120,6 +120,9 @@
     "cordova-android-support-gradle-release": {
       "ANDROID_SUPPORT_VERSION": "27.+",
       "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-wkwebview-file-xhr": {
+      "PACKAGE_NAME": "com.abujabir.ml"
     }
   },
   "dependent_plugins": {},
@@ -164,6 +167,7 @@
     "cordova-plugin-wkwebview-engine": "1.2.1",
     "es6-promise-plugin": "4.2.2",
     "cordova-plugin-x-socialsharing": "5.4.0",
-    "cordova-android-support-gradle-release": "3.0.1"
+    "cordova-android-support-gradle-release": "3.0.1",
+    "cordova-plugin-wkwebview-file-xhr": "2.1.1"
   }
 }

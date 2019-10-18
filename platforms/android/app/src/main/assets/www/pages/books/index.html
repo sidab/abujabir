@@ -6,30 +6,38 @@
 
             <div class="block-title block-title-large text-color-white">Единобожие - Вероубеждение</div>
 
-            <div class="books">
+            {{#if books}}
 
-                <div class="books-inner">
+                <div class="margin-horizontal books">
 
-                    {{#each books}}
+                    <div class="swiper-container">
 
-                        <div data-id="{{id}}" style="background-image: url({{Фон}})" class="book elevation-5 padding">
+                        <div class="swiper-wrapper">
 
-                            <div class="book-inner">
+                            {{#each books}}
 
-                                <div class="book-title text-color-white margin-bottom">{{Название}}</div>
-                                <div class="book-author text-color-white">{{Автор}}</div>
+                                <div data-id="{{id}}" style="background-image: url({{Фон}})" class="swiper-slide book elevation-5 padding">
+
+                                    <div class="book-inner">
+
+                                        <div class="book-title text-color-white margin-bottom">{{Название}}</div>
+                                        <div class="book-author text-color-white">{{Автор}}</div>
+
+                                    </div>
+
+                                </div>
+
+                            {{/each}}
+
+                            <div data-id="favorites" style="background-image: url(img/favorites.jpg)" class="swiper-slide book elevation-5 padding">
+
+                                <div class="book-inner">
+
+                                    <div class="book-title text-color-white margin-bottom">Избранные</div>
+
+                                </div>
 
                             </div>
-
-                        </div>
-
-                    {{/each}}
-
-                    <div data-id="favorites" style="background-image: url(img/favorites.jpg)" class="book elevation-5 padding">
-
-                        <div class="book-inner">
-
-                            <div class="book-title text-color-white margin-bottom">Избранные</div>
 
                         </div>
 
@@ -37,7 +45,15 @@
 
                 </div>
 
-            </div>
+            {{else}}
+
+                <div class="block block-preloader text-align-center">
+
+                    <div class="preloader color-white"></div>
+
+                </div>
+
+            {{/if}}
 
         </div>
 
@@ -47,12 +63,25 @@
 
 <style scoped>
 
-    .page-content {
+    {{this}} {
         background: url(img/bg.jpg) no-repeat;
         background-size: cover;
         background-position: center;
+    }
+
+    .page-content {
         overflow: hidden;
     }
+
+    .block-preloader {
+        margin-top: 50px;
+    }
+
+    .preloader {
+        width: 50px;
+        height: 50px;
+    }
+
     .block-title-large {
         margin-top: 50px;
         font-family: 'SF UI Display';
@@ -65,16 +94,7 @@
         height: 100%;
     }
 
-    .books-inner {
-        overflow-x: scroll;
-        overflow-y: hidden;
-        white-space: nowrap;
-        padding-left: 20px;
-        height: 100%;
-    }
-
     .book {
-        display: inline-block;
         width: 250px;
         height: 330px;
         border: 1px solid;
@@ -115,7 +135,7 @@
 
             return {
 
-                books: app.methods.books()
+                books: null
 
             }
 
@@ -130,13 +150,36 @@
                 var component = this;
                 var page = component.$el;
 
-                page.find('.book').on('click', function () {
+                app.methods.books(false, function (books) {
 
-                    var id = $$(this).data('id');
+                    component.books = books;
 
-                    app.views.current.router.navigate('/book/' + id);
+                    component.$update(function () {
+
+                        page.attr('data-f7-' + component.$id, '');
+
+                        page.find('.book').on('click', function () {
+
+                            var id = $$(this).data('id');
+
+                            app.views.current.router.navigate('/book/' + id);
+
+                        });
+
+                        booksSwiper = new Swiper('.swiper-container', {
+                            slidesPerView: 'auto',
+                            centeredSlides: false,
+                            spaceBetween: 0,
+                        });
+
+                    });
 
                 });
+
+            },
+            pageReinit: function () {
+
+                $$(window).trigger('resize');
 
             }
 
