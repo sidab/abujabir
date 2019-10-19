@@ -17,8 +17,6 @@
     <preference name="SplashScreenBackgroundColor" value="0xeeeeeeee" />
     <preference name="phonegap-version" value="cli-9.0.0" />
     <preference name="android-minSdkVersion" value="19" />
-    <preference name="xwalkMultipleApk" value="true" />
-    <preference name="xwalk64bit" value="true" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#007aff" />
     <icon src="www/icon.png" />
@@ -75,6 +73,4 @@
     <plugin name="cordova-plugin-x-socialsharing" spec="5.4.0" />
 
     <plugin name="cordova-plugin-crosswalk-webview" spec="2.4.0"/>
-    <plugin name="cordova-build-architecture" spec="https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.4" />
-    <preference name="buildArchitecture" value="arm64" />
 </widget>
