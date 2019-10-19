@@ -3,10 +3,7 @@
   "version": "1.4.0",
   "displayName": "Единобожие - Вероубеждение",
   "cordova": {
-    "platforms": [
-      "ios",
-      "android"
-    ],
+    "platforms": [],
     "plugins": {
       "cordova-plugin-whitelist": {},
       "cordova-plugin-splashscreen": {},
@@ -23,9 +20,7 @@
     }
   },
   "dependencies": {
-    "cordova-android": "^8.1.0",
     "cordova-android-support-gradle-release": "3.0.1",
-    "cordova-ios": "^5.0.1",
     "cordova-plugin-background-audio": "1.1.0",
     "cordova-plugin-crosswalk-webview": "file:../../../Downloads/test/cordova-plugin-crosswalk-webview",
     "cordova-plugin-splashscreen": "~5.0.2",
