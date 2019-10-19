@@ -81,6 +81,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-wkwebview-engine": "1.2.1",
     "cordova-plugin-wkwebview-file-xhr": "2.1.1",
     "es6-promise-plugin": "4.2.2",
-    "cordova-plugin-x-socialsharing": "5.4.0"
+    "cordova-plugin-x-socialsharing": "5.4.0",
+    "cordova-build-architecture": "1.0.4"
   };
 });

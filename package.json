@@ -4,8 +4,8 @@
   "displayName": "Единобожие - Вероубеждение",
   "cordova": {
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "android"
     ],
     "plugins": {
       "cordova-plugin-whitelist": {},
@@ -18,7 +18,8 @@
       "cordova-android-support-gradle-release": {
         "ANDROID_SUPPORT_VERSION": "27.+"
       },
-      "cordova-plugin-wkwebview-file-xhr": {}
+      "cordova-plugin-wkwebview-file-xhr": {},
+      "cordova-build-architecture": {}
     }
   },
   "dependencies": {
@@ -34,5 +35,8 @@
     "cordova-plugin-wkwebview-file-xhr": "2.1.1",
     "cordova-plugin-x-socialsharing": "5.4.0",
     "es6-promise-plugin": "4.2.2"
+  },
+  "devDependencies": {
+    "cordova-build-architecture": "https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.4"
   }
 }

@@ -98,8 +98,9 @@ ext {
 }
 
 // PLUGIN GRADLE EXTENSIONS START
-apply from: "../cordova-plugin-crosswalk-webview/ml-xwalk.gradle"
 apply from: "../cordova-android-support-gradle-release/ml-cordova-android-support-gradle-release.gradle"
+apply from: "../cordova-build-architecture/ml-architecture.gradle"
+apply from: "../cordova-plugin-crosswalk-webview/ml-xwalk.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 def hasBuildExtras1 = file('build-extras.gradle').exists()
@@ -295,7 +296,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: '*.jar')
     // SUB-PROJECT DEPENDENCIES START
     implementation(project(path: ":CordovaLib"))
-    implementation  "com.android.support:support-v4:27.+"
+    implementation "com.android.support:support-v4:24.1.1+"
     // SUB-PROJECT DEPENDENCIES END
 }
 

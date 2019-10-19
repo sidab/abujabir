@@ -7,6 +7,13 @@
     "files": {}
   },
   "installed_plugins": {
+    "cordova-android-support-gradle-release": {
+      "ANDROID_SUPPORT_VERSION": "27.+",
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-build-architecture": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
     "cordova-plugin-background-audio": {
       "PACKAGE_NAME": "com.abujabir.ml"
     },
@@ -30,14 +37,10 @@
     "cordova-plugin-wkwebview-engine": {
       "PACKAGE_NAME": "com.abujabir.ml"
     },
-    "cordova-plugin-x-socialsharing": {
-      "PACKAGE_NAME": "com.abujabir.ml"
-    },
-    "cordova-android-support-gradle-release": {
-      "ANDROID_SUPPORT_VERSION": "27.+",
-      "PACKAGE_NAME": "com.abujabir.ml"
-    },
     "cordova-plugin-wkwebview-file-xhr": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-x-socialsharing": {
       "PACKAGE_NAME": "com.abujabir.ml"
     }
   },

@@ -55,7 +55,8 @@ module.exports.metadata =
     "cordova-plugin-wkwebview-engine": "1.2.1",
     "es6-promise-plugin": "4.2.2",
     "cordova-plugin-x-socialsharing": "5.4.0",
-    "cordova-plugin-wkwebview-file-xhr": "2.1.1"
+    "cordova-plugin-wkwebview-file-xhr": "2.1.1",
+    "cordova-build-architecture": "1.0.4"
 }
 // BOTTOM OF METADATA
 });

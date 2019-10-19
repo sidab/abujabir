@@ -33,6 +33,9 @@
     },
     "cordova-plugin-wkwebview-file-xhr": {
       "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-build-architecture": {
+      "PACKAGE_NAME": "com.abujabir.ml"
     }
   },
   "dependent_plugins": {
