@@ -39,30 +39,6 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-statusbar": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-statusbar@2.4.3"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
-  "cordova-plugin-wkwebview-engine": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-wkwebview-engine"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
-  "cordova-plugin-crosswalk-webview": {
-    "source": {
-      "type": "local",
-      "path": "/Users/umahan/Documents/GitHub/abujabir/node_modules/cordova-plugin-crosswalk-webview"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-android-support-gradle-release": {
     "source": {
       "type": "registry",
@@ -71,13 +47,15 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-wkwebview-file-xhr": {
+  "cordova-plugin-crosswalk-webview": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-wkwebview-file-xhr"
+      "id": "cordova-plugin-crosswalk-webview@2.4.0"
     },
     "is_top_level": true,
-    "variables": {}
+    "variables": {
+      "XWALK_MODE": "lite"
+    }
   },
   "cordova-build-architecture": {
     "source": {

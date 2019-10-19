@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.abujabir.ml" version="7.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.abujabir.ml" version="7.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Единобожие - Вероубеждение</name>
     <description>
         Аудио лекции СаидАхмада Муцалаулского.
@@ -17,16 +17,8 @@
     <preference name="SplashScreenBackgroundColor" value="0xeeeeeeee" />
     <preference name="phonegap-version" value="cli-9.0.0" />
     <preference name="android-minSdkVersion" value="19" />
-    <preference name="xwalk64bit" value="true" />
-    <preference name="buildArchitecture" value="arm64" />
     <preference name="xwalkMultipleApk" value="true" />
-    <preference name="StatusBarOverlaysWebView" value="false" />
-    <preference name="StatusBarBackgroundColor" value="#007aff" />
-    <feature name="CDVWKWebViewEngine">
-        <param name="ios-package" value="CDVWKWebViewEngine" />
-    </feature>
-    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
-    <preference name="InterceptRemoteRequests" value="all" />
+    <preference name="xwalk64bit" value="true" />
     <icon src="www/icon.png" />
     <platform name="ios">
         <icon height="1024" src="www/res/icon/ios/icon-1024.png" width="1024" />
@@ -74,12 +66,13 @@
     </platform>
     <content src="index.html" />
     <access origin="*" />
-    <allow-navigation href="*" />
     <plugin name="cordova-plugin-whitelist" spec="~1.3.3" />
-    <plugin name="cordova-plugin-statusbar" spec="2.4.3" />
     <plugin name="cordova-plugin-splashscreen" spec="~5.0.2" />
     <plugin name="cordova-plugin-background-audio" spec="1.1.0" />
     <plugin name="cordova-plugin-x-socialsharing" spec="5.4.0" />
+
+    <plugin name="cordova-plugin-crosswalk-webview" spec="2.4.0"/>
     <plugin name="cordova-build-architecture" spec="https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.4" />
-    <plugin name="cordova-plugin-crosswalk-webview" spec="2.4.0" />
+    <preference name="buildArchitecture" value="arm64" />
+    <engine name="android" spec="^8.1.0" />
 </widget>
