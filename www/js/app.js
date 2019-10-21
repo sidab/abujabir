@@ -7,7 +7,7 @@ var app = new Framework7({
   root: '#app',
   name: 'Абу Джабир',
   theme: 'ios',
-  version: 7.2 ,
+  version: 7.3 ,
   routes: routes,
   backend: 'https://abujabir.ru/new/',
   touch: {
@@ -470,6 +470,8 @@ $$(document).on('deviceready', function () {
     main: true
   });
 
+  cordova.plugins.backgroundMode.enable();
+
   toolbarPlayer = $$('.toolbar-player');
 
   sheetPlayer = app.sheet.create({
@@ -560,7 +562,7 @@ $$(document).on('deviceready', function () {
 
     navigator.splashscreen.hide();
 
-  }, 100);
+  }, app.device.ios ? 100 : 300);
 
   app.on('audio:loadedmetadata', function () {
 
@@ -655,7 +657,7 @@ $$(document).on('deviceready', function () {
 
             audioRange.setValue(latestTime);
 
-          }, 100);
+          }, app.device.ios ? 0 : 100);
 
         }
 

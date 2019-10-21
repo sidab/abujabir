@@ -5,12 +5,12 @@
   "cordova": {
     "platforms": [
       "android",
-      "browser"
+      "browser",
+      "ios"
     ],
     "plugins": {
       "cordova-plugin-whitelist": {},
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-background-audio": {},
       "cordova-plugin-x-socialsharing": {},
       "cordova-android-support-gradle-release": {
         "ANDROID_SUPPORT_VERSION": "27.+"
@@ -26,6 +26,7 @@
       "cordova-plugin-statusbar": {},
       "cordova-plugin-wkwebview-engine": {},
       "cordova-plugin-wkwebview-file-xhr": {},
+      "cordova-plugin-background-audio": {},
       "cordova-plugin-background-mode": {}
     }
   },
@@ -34,6 +35,8 @@
     "cordova-android-support-gradle-release": "3.0.1",
     "cordova-browser": "^6.0.0",
     "cordova-build-architecture": "git+https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.4",
+    "cordova-ios": "^5.0.1",
+    "cordova-plugin-audio-background-mode": "0.0.1",
     "cordova-plugin-background-audio": "1.1.0",
     "cordova-plugin-background-mode": "0.7.3",
     "cordova-plugin-crosswalk-webview": "2.4.0",

@@ -11,9 +11,6 @@
       "ANDROID_SUPPORT_VERSION": "27.+",
       "PACKAGE_NAME": "com.abujabir.ml"
     },
-    "cordova-plugin-background-audio": {
-      "PACKAGE_NAME": "com.abujabir.ml"
-    },
     "cordova-plugin-splashscreen": {
       "PACKAGE_NAME": "com.abujabir.ml"
     },
@@ -41,6 +38,9 @@
       "PACKAGE_NAME": "com.abujabir.ml"
     },
     "cordova-plugin-wkwebview-file-xhr": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-background-audio": {
       "PACKAGE_NAME": "com.abujabir.ml"
     },
     "cordova-plugin-background-mode": {
