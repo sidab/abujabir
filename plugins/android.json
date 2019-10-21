@@ -42,10 +42,16 @@
     },
     "cordova-plugin-wkwebview-file-xhr": {
       "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-background-mode": {
+      "PACKAGE_NAME": "com.abujabir.ml"
     }
   },
   "dependent_plugins": {
     "es6-promise-plugin": {
+      "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-device": {
       "PACKAGE_NAME": "com.abujabir.ml"
     }
   }
