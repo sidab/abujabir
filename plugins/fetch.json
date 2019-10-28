@@ -104,5 +104,13 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "cordova-plugin-music-controls": {
+    "source": {
+      "type": "registry",
+      "id": "https://github.com/homerours/cordova-music-controls-plugin"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

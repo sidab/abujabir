@@ -45,6 +45,9 @@
     },
     "cordova-plugin-background-mode": {
       "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "cordova-plugin-music-controls": {
+      "PACKAGE_NAME": "com.abujabir.ml"
     }
   },
   "dependent_plugins": {

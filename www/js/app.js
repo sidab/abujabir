@@ -7,7 +7,7 @@ var app = new Framework7({
   root: '#app',
   name: 'Абу Джабир',
   theme: 'ios',
-  version: 7.3 ,
+  version: 7.4 ,
   routes: routes,
   backend: 'https://abujabir.ru/new/',
   touch: {
@@ -525,8 +525,6 @@ $$(document).on('deviceready', function () {
 
   firstPlay = false;
   latestTime = 0;
-
-  console.log(localStorage.latest);
 
   if (localStorage.latest !== undefined) {
 
