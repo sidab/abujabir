@@ -363,6 +363,20 @@ var app = new Framework7({
 
         }
 
+      },
+      next15sec: function () {
+
+        var currentTime = audioEl.currentTime;
+
+        audioEl.currentTime = currentTime + 15;
+
+      },
+      prev15sec: function () {
+
+        var currentTime = audioEl.currentTime;
+
+        audioEl.currentTime = currentTime - 15;
+
       }
     },
     loadData: function(callback) {
@@ -470,7 +484,13 @@ $$(document).on('deviceready', function () {
     main: true
   });
 
-  cordova.plugins.backgroundMode.enable();
+  try {
+
+      cordova.plugins.backgroundMode.enable();
+
+  } catch (e) {
+
+  }
 
   toolbarPlayer = $$('.toolbar-player');
 
@@ -489,6 +509,8 @@ $$(document).on('deviceready', function () {
     sheetPlayer.close();
 
   });
+
+  change = false;
 
   audioRange = app.range.create({
     el: sheetPlayer.$el.find('.range-audio'),
@@ -560,7 +582,7 @@ $$(document).on('deviceready', function () {
 
     navigator.splashscreen.hide();
 
-  }, app.device.ios ? 100 : 300);
+  }, app.device.ios ? 300 : 1000);
 
   app.on('audio:loadedmetadata', function () {
 

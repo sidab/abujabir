@@ -39,16 +39,12 @@
 
         {{#if book.Вырезки}}
 
-            <div class="subnavbar">
+            <div class="toolbar tabbar toolbar-top">
 
-                <div class="subnavbar-inner">
+                <div class="toolbar-inner no-padding-horizontal">
 
-                    <div class="segmented segmented-raised">
-
-                        <a class="button tab-link tab-link-active" href="#uroki">Уроки</a>
-                        <a class="button tab-link" href="#virezki">Вырезки</a>
-
-                    </div>
+                    <a href="#uroki" class="tab-link tab-link-active">Уроки</a>
+                    <a href="#virezki" class="tab-link">Вырезки</a>
 
                 </div>
 
@@ -88,8 +84,8 @@
 
                                                 <span class="duration">{{Длительность}}</span>
 
-                                                <i class="icon f7-icons download">download</i>
-                                                <i class="icon f7-icons downloaded text-color-green display-none">check_round_fill</i>
+                                                <i class="icon f7-icons download">square_arrow_down</i>
+                                                <i class="icon f7-icons downloaded text-color-green display-none">checkmark_alt</i>
                                                 <div class="gauge gauge-progress display-none"></div>
                                                 <i class="icon f7-icons favorite add-to-favorite">star</i>
                                                 <i class="icon f7-icons favorite display-none remove-from-favorite text-color-orange">star_fill</i>
@@ -112,7 +108,7 @@
 
                 <div class="tab" id="virezki">
 
-                    <div class="list accordion-list">
+                    <div class="list">
 
                         <ul>
 
@@ -158,8 +154,8 @@
 
                                                                     <span class="duration">{{Длительность}}</span>
 
-                                                                    <i class="icon f7-icons download">download</i>
-                                                                    <i class="icon f7-icons downloaded text-color-green display-none">check_round_fill</i>
+                                                                    <i class="icon f7-icons download">square_arrow_down</i>
+                                                                    <i class="icon f7-icons downloaded text-color-green display-none">checkmark_circle</i>
                                                                     <div class="gauge gauge-progress display-none"></div>
                                                                     <i class="icon f7-icons favorite add-to-favorite">star</i>
                                                                     <i class="icon f7-icons favorite display-none remove-from-favorite text-color-orange">star_fill</i>
@@ -212,10 +208,6 @@
 
     }
 
-    .favorite {
-        font-size: 30px;
-    }
-
     .accordion-item-content .list ul {
         background: #eee;
     }
@@ -223,6 +215,7 @@
     .download, .downloaded, .favorite {
         width: 35px;
         padding-top: 4px;
+        font-size: 26px;
     }
 
     .gauge-progress {
@@ -242,6 +235,12 @@
     .gauge-progress .preloader {
         top: 7px;
     }
+
+    .tab-link-active {
+        background: var(--f7-theme-color);
+        color: #fff;
+    }
+
 </style>
 
 <script>

@@ -63,60 +63,64 @@
 
                 <div class="sheet-modal-inner">
 
+                    <div class="swipe-handler"></div>
+
                     <div class="page-content">
 
-                        <div class="list simple-list">
+                        <div class="range-audio-block margin-horizontal text-color-gray">
 
-                            <ul>
+                            <div class="current-time">00:00</div>
 
-                                <li>
+                            <div class="range-slider range-audio"></div>
 
-                                    <div class="item-cell flex-shrink-0 current-time">00:00</div>
-
-                                    <div class="item-cell flex-shrink-3">
-
-                                        <div class="range-slider range-audio"></div>
-
-                                    </div>
-
-                                    <div class="item-cell width-auto flex-shrink-0 duration">00:00</div>
-
-                                </li>
-
-                            </ul>
+                            <div class="duration text-align-right">00:00</div>
 
                         </div>
 
                         <div class="audio-title padding-horizontal margin-bottom text-align-center"></div>
 
-                        <div class="audio-author text-align-center margin-bottom"></div>
+                        <div class="audio-author text-align-center margin-bottom text-color-gray"></div>
 
-                        <div class="row text-align-center audio-controls padding-top">
+                        <div class="row text-align-center audio-controls">
 
-                            <div class="col-30">
+                            <div class="col-40">
 
-                                <i onclick="app.methods.player.prev()" class="icon material-icons">skip_previous</i>
+                                <i onclick="app.methods.player.prev15sec()" class="icon f7-icons small margin-right">gobackward_15</i>
+
+                                <i onclick="app.methods.player.prev()" class="icon f7-icons">backward_end_alt_fill</i>
+
+                            </div>
+
+                            <div class="col-20">
+
+                                <i onclick="audioEl.pause()" class="icon f7-icons display-none pause">pause_fill</i>
+                                <i onclick="audioEl.play()" class="icon f7-icons resume">play_fill</i>
 
                             </div>
 
                             <div class="col-40">
 
-                                <i onclick="audioEl.pause()" class="icon material-icons display-none pause">pause</i>
-                                <i onclick="audioEl.play()" class="icon material-icons resume">play_arrow</i>
+                                <i onclick="app.methods.player.next()" class="icon f7-icons">forward_end_alt_fill</i>
 
-                            </div>
-
-                            <div class="col-30">
-
-                                <i onclick="app.methods.player.next()" class="icon material-icons">skip_next</i>
+                                <i onclick="app.methods.player.next15sec()" class="icon f7-icons small margin-left">goforward_15</i>
 
                             </div>
 
                         </div>
 
-                        <div class="block">
+                        <div class="width-100 share-button-block">
 
-                            <button class="button button-large button-raised button-fill share-button">Поделиться</button>
+                            <div class="margin-horizontal">
+
+                                <button class="button button-large button-outline share-button width-100">
+
+                                    <i class="icon material-icons">share</i>
+
+                                    <span>Поделиться</span>
+
+                                </button>
+
+                            </div>
 
                         </div>
 

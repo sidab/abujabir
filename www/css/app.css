@@ -22,12 +22,30 @@ html, body {
     background: #eee;
 }
 
-.page {
-    animation-duration: .3s !important;
-}
-
 ::-webkit-scrollbar {
     display: none;
+}
+
+.swipe-handler {
+    height: 16px;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    top: 0;
+    cursor: pointer;
+    z-index: 10;
+}
+.swipe-handler:after {
+    content: '';
+    width: 36px;
+    height: 6px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -18px;
+    margin-top: -3px;
+    border-radius: 3px;
+    background: #666;
 }
 
 .sheet-player .preloader-block .text {
@@ -46,12 +64,29 @@ html, body {
 
 .sheet-player .duration, .sheet-player .current-time {
     width: 50px !important;
+    position: absolute;
+    bottom: -25px;
+}
+
+.sheet-player .current-time {
+    left: 0px;
+}
+
+.sheet-player .duration {
+    right: 0px;
+}
+
+.sheet-player .range-audio-block {
+    position: relative;
+    margin-bottom: 40px;
+    margin-top: 40px;
 }
 
 .sheet-player .audio-title {
     font-size: 23px;
     font-weight: bold;
     white-space: normal;
+    color: #5b5b5b;
 }
 
 .sheet-player .audio-title-medium {
@@ -62,13 +97,32 @@ html, body {
     font-size: 16px;
 }
 
+.sheet-player .audio-controls {
+    margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    width: 350px;
+}
+
 .sheet-player .audio-controls i {
-    font-size: 55px;
+    font-size: 50px;
+    color: #5b5b5b;
+}
+
+.sheet-player .audio-controls .small {
+    font-size: 30px;
+    --f7-typography-margin: 25px;
 }
 
 .sheet-player {
-    height:430px;
-    --f7-sheet-bg-color: #fff;
+    height:410px;
+    --f7-sheet-bg-color: #f3f3f3;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.sheet-player .share-button-block {
+    position: absolute;
+    bottom: 25px;
 }
 
 .toolbar-player {
