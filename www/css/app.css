@@ -14,7 +14,7 @@
     user-select: none;
 }
 
-.md * {
+.device-android * {
     touch-action: manipulation;
 }
 
