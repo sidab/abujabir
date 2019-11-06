@@ -7,7 +7,7 @@ var app = new Framework7({
   root: '#app',
   name: 'Абу Джабир',
   theme: 'ios',
-  version: 7.5 ,
+  version: 7.6 ,
   routes: routes,
   backend: 'https://abujabir.ru/new/',
   touch: {
@@ -517,7 +517,7 @@ $$(document).on('deviceready', function () {
 
   });
 
-  sheetPlayer.$el.on('touchmove', function () {
+  $$('.sheet-player .swipe-handler').on('touchmove', function () {
 
     sheetPlayer.close();
 

@@ -31,7 +31,7 @@ html, body {
 }
 
 .swipe-handler {
-    height: 16px;
+    height: 30px;
     position: absolute;
     left: 0;
     width: 100%;
@@ -39,6 +39,7 @@ html, body {
     cursor: pointer;
     z-index: 10;
 }
+
 .swipe-handler:after {
     content: '';
     width: 36px;
