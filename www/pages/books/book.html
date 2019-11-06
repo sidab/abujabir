@@ -264,6 +264,7 @@
             pageInit: function() {
 
                 var component = this;
+                var app = component.$app;
                 var page = component.$el;
 
                 localforage.keys().then(function(keys) {
@@ -504,6 +505,17 @@
 
                 });
 
+
+            },
+            pageAfterIn: function () {
+
+                var component = this;
+
+                if (component.back) {
+
+                    component.$router.back();
+
+                }
 
             }
 

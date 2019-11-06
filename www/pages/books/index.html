@@ -148,6 +148,7 @@
             pageInit: function() {
 
                 var component = this;
+                var app = component.$app;
                 var page = component.$el;
 
                 app.methods.books(false, function (books) {
@@ -156,11 +157,17 @@
 
                     component.$update(function () {
 
+                        component.$router.navigate('/book/1', {
+                            context: {
+                                back: true
+                            }
+                        });
+
                         page.find('.book').on('click', function () {
 
                             var id = $$(this).data('id');
 
-                            app.views.current.router.navigate('/book/' + id);
+                            component.$router.navigate('/book/' + id);
 
                         });
 

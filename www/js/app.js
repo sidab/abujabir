@@ -18,7 +18,6 @@ var app = new Framework7({
     fastClicks: true
   },
   view: {
-    //animate: false,
     iosDynamicNavbar: false,
     stackPages: true,
     preloadPreviousPage: false,
@@ -492,6 +491,13 @@ $$(document).on('deviceready', function () {
 
   }
 
+  if (app.device.android) {
+
+    var attachFastClick = Origami.fastclick;
+    attachFastClick(document.body);
+
+  }
+
   toolbarPlayer = $$('.toolbar-player');
 
   sheetPlayer = app.sheet.create({
@@ -582,7 +588,7 @@ $$(document).on('deviceready', function () {
 
     navigator.splashscreen.hide();
 
-  }, app.device.ios ? 300 : 1000);
+  }, 2000);
 
   app.on('audio:loadedmetadata', function () {
 
