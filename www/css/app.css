@@ -14,6 +14,10 @@
     user-select: none;
 }
 
+.md * {
+    touch-action: manipulation;
+}
+
 html, body {
     overflow: hidden;
 }
