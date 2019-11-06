@@ -513,7 +513,11 @@
 
                 if (component.back) {
 
-                    component.$router.back();
+                    setTimeout(function () {
+
+                        component.$router.back();
+
+                    })
 
                 }
 
