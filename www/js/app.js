@@ -600,16 +600,16 @@ $$(document).on('deviceready', function () {
 
     if (latest.title.length > 20 && latest.title.length < 40) {
 
-      sheetPlayer.$el.find('.audio-title').addClass('audio-title-medium');
+      sheetPlayer.$el.addClass('size-medium');
 
     } else if (latest.title.length >= 40) {
 
-      sheetPlayer.$el.find('.audio-title').addClass('audio-title-small');
+      sheetPlayer.$el.addClass('size-small');
 
     } else {
 
-      sheetPlayer.$el.find('.audio-title').removeClass('audio-title-medium');
-      sheetPlayer.$el.find('.audio-title').removeClass('audio-title-small');
+      sheetPlayer.$el.removeClass('size-medium');
+      sheetPlayer.$el.removeClass('size-small');
 
     }
 

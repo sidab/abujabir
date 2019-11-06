@@ -69,7 +69,11 @@ html, body {
 .sheet-player .duration, .sheet-player .current-time {
     width: 50px !important;
     position: absolute;
-    bottom: -25px;
+    bottom: -15px;
+}
+
+.sheet-player .hadis {
+    font-size: 12px;
 }
 
 .sheet-player .current-time {
@@ -84,6 +88,8 @@ html, body {
     position: relative;
     margin-bottom: 40px;
     margin-top: 40px;
+    --f7-range-knob-size: 10px;
+    --f7-range-knob-color: var(--f7-theme-color)
 }
 
 .sheet-player .audio-title {
@@ -93,11 +99,11 @@ html, body {
     color: #5b5b5b;
 }
 
-.sheet-player .audio-title-medium {
+.sheet-player.size-medium .audio-title {
     font-size: 18px;
 }
 
-.sheet-player .audio-title-small {
+.sheet-player.size-small .audio-title {
     font-size: 16px;
 }
 
@@ -119,9 +125,17 @@ html, body {
 }
 
 .sheet-player {
-    height:410px;
+    height:430px;
     --f7-sheet-bg-color: #f3f3f3;
     border-radius: 10px 10px 0px 0px;
+}
+
+.sheet-player.size-medium {
+    height: 460px;
+}
+
+.sheet-player.size-small {
+    height: 480px;
 }
 
 .sheet-player .share-button-block {
