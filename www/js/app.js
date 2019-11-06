@@ -21,7 +21,8 @@ var app = new Framework7({
     iosDynamicNavbar: false,
     stackPages: true,
     preloadPreviousPage: false,
-    removeElements: false
+    removeElements: false,
+    iosSwipeBack: false
   },
   dialog: {
     buttonCancel: 'Отмена',
@@ -502,7 +503,7 @@ $$(document).on('deviceready', function () {
 
   sheetPlayer = app.sheet.create({
     el: '.sheet-player',
-    swipeToClose: true,
+    swipeToClose: false,
     backdrop: true,
     closeByOutsideClick: true,
     closeByBackdropClick: true
@@ -511,6 +512,12 @@ $$(document).on('deviceready', function () {
   sheetPlayer.open();
 
   setTimeout(function () {
+
+    sheetPlayer.close();
+
+  });
+
+  sheetPlayer.$el.on('touchmove', function () {
 
     sheetPlayer.close();
 
