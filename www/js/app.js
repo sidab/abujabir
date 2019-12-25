@@ -4,7 +4,7 @@ var app = new Framework7({
   root: '#app',
   name: 'Абу Джабир',
   theme: 'ios',
-  version: 7.7,
+  version: 7.8,
   routes: routes,
   backend: 'https://abujabir.ru/new/',
   touch: {
