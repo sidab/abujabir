@@ -513,14 +513,6 @@ $$(document).on('deviceready', function () {
     closeByBackdropClick: true
   });
 
-  sheetPlayer.open();
-
-  setTimeout(function () {
-
-    sheetPlayer.close();
-
-  }, 300);
-
   window.audioRange = app.range.create({
     el: sheetPlayer.$el.find('.range-audio'),
     label: false,
@@ -633,6 +625,10 @@ $$(document).on('deviceready', function () {
           setTimeout(function () {
 
             player.pause();
+
+            audioRange.setValue(latestTime);
+
+            latestTime = 0;
 
           }, 1000);
 
@@ -757,21 +753,33 @@ $$(document).on('deviceready', function () {
 
   latestTime = 0;
 
-  if (localStorage.latest !== undefined) {
+  sheetPlayer.open();
 
-    var latest = JSON.parse(localStorage.latest);
+  setTimeout(function () {
 
-    latestTime = latest.time;
-
-    app.methods.player.play(latest);
+    sheetPlayer.close();
 
     setTimeout(function () {
 
-      app.methods.player.play(latest);
+      if (localStorage.latest !== undefined) {
+
+        var latest = JSON.parse(localStorage.latest);
+
+        latestTime = latest.time;
+
+        app.methods.player.play(latest);
+
+        setTimeout(function () {
+
+          app.methods.player.play(latest);
+
+        }, 1000);
+
+      }
 
     }, 1000);
 
-  }
+  }, 1000);
 
   $$(document).on('backbutton', function(event) {
 
@@ -783,6 +791,6 @@ $$(document).on('deviceready', function () {
 
     navigator.splashscreen.hide();
 
-  }, 2500);
+  }, 3500);
 
 });
