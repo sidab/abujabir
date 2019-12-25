@@ -31,7 +31,6 @@ var app = new Framework7({
       play: function (audio) {
 
         sheetPlayer.$el.find('.preloader-block').removeClass('display-none');
-        sheetPlayer.$el.find('.sheet-modal-inner').addClass('display-none');
         sheetPlayer.$el.find('.page-content').addClass('disabled');
 
         if(!sheetPlayer.opened) {
@@ -60,7 +59,7 @@ var app = new Framework7({
 
           player.unload();
 
-          player.load();
+          player.play();
 
           setTimeout(function () {
 
@@ -613,12 +612,9 @@ $$(document).on('deviceready', function () {
       });
 
       sheetPlayer.$el.find('.preloader-block').addClass('display-none');
-      sheetPlayer.$el.find('.sheet-modal-inner').removeClass('display-none');
       sheetPlayer.$el.find('.page-content').removeClass('disabled');
 
       this.setPosition(latestTime);
-
-      this.play();
 
       if (latestTime > 0) {
 
@@ -647,6 +643,10 @@ $$(document).on('deviceready', function () {
           }, 1000);
 
       }
+
+    },
+    whileloading: function () {
+
 
     },
     whileplaying: function () {
@@ -770,7 +770,6 @@ $$(document).on('deviceready', function () {
     setTimeout(function () {
 
       app.statusbar.hide();
-      app.statusbar.show();
 
     });
 
@@ -781,6 +780,8 @@ $$(document).on('deviceready', function () {
   sheetPlayer.open();
 
   setTimeout(function () {
+
+    app.statusbar.show();
 
     sheetPlayer.close();
 

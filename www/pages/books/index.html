@@ -197,6 +197,10 @@
             },
             pageReinit: function () {
 
+                var component = this;
+                var app = component.$app;
+                var page = component.$el;
+
                 $$(window).trigger('resize');
 
                 page.find('video')[0].play();
