@@ -626,6 +626,20 @@ $$(document).on('deviceready', function () {
 
             player.pause();
 
+            var currentTimeMinutes = Math.floor((player.position / 1000) / 60).toLocaleString('en-US', {
+              minimumIntegerDigits: 2,
+              useGrouping: false
+            });
+
+            var currentTimeSeconds = (Math.floor(player.position / 1000) - currentTimeMinutes * 60).toLocaleString('en-US', {
+              minimumIntegerDigits: 2,
+              useGrouping: false
+            });
+
+            var currentTime = currentTimeMinutes + ':' + currentTimeSeconds;
+
+            sheetPlayer.$el.find('.current-time').html(currentTime);
+
             audioRange.setValue(latestTime);
 
             latestTime = 0;
@@ -751,6 +765,17 @@ $$(document).on('deviceready', function () {
     }
   });
 
+  if (app.device.ios) {
+
+    setTimeout(function () {
+
+      app.statusbar.hide();
+      app.statusbar.show();
+
+    });
+
+  }
+
   latestTime = 0;
 
   sheetPlayer.open();
@@ -791,6 +816,6 @@ $$(document).on('deviceready', function () {
 
     navigator.splashscreen.hide();
 
-  }, 3500);
+  }, 4000);
 
 });
