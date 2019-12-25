@@ -2,6 +2,12 @@
 
     <div class="page">
 
+        <video autoplay muted loop id="video">
+
+            <source src="video/background.mov">
+
+        </video>
+
         <div class="page-content">
 
             <div class="block-title block-title-large text-color-white">Единобожие - Вероубеждение</div>
@@ -69,6 +75,11 @@
         background-position: center;
     }
 
+    {{this}} video {
+        position: fixed;
+        height: 100%;
+    }
+
     .page-content {
         overflow: hidden;
     }
@@ -97,7 +108,6 @@
     .book {
         width: 250px;
         height: 330px;
-        border: 1px solid;
         margin-right: 20px;
         border-radius: 5px;
         background-size: cover;
@@ -157,11 +167,11 @@
 
                     component.$update(function () {
 
-                        component.$router.navigate('/book/1', {
+                        /*component.$router.navigate('/book/1', {
                             context: {
                                 back: true
                             }
-                        });
+                        });*/
 
                         page.find('.book').on('click', function () {
 

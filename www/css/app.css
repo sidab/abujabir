@@ -40,6 +40,10 @@ html, body {
     z-index: 10;
 }
 
+.sheet-player::before {
+    background: transparent !important;
+}
+
 .swipe-handler:after {
     content: '';
     width: 36px;

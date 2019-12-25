@@ -1,8 +1,8 @@
 <template>
 
-    <div class="page">
+    <div class="page" style="background-image: url({{book.Фон}})">
 
-        <div class="navbar no-shadow">
+        <div class="navbar theme-dark navbar-large navbar-large-transparent">
 
             <div class="navbar-bg"></div>
 
@@ -10,7 +10,7 @@
 
                 <div class="left">
 
-                    <a href="#" class="link back">
+                    <a href="#" class="link back text-color-white">
 
                         <i class="icon icon-back"></i>
                         <span>Назад</span>
@@ -33,11 +33,31 @@
 
                 </div>
 
+                <div class="title-large">
+
+                    <div class="title-large-text">
+
+                        {{#if book.Название}}
+
+                            {{book.Название}}
+
+                        {{else}}
+
+                            Избранные
+
+                        {{/if}}
+
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
 
-        {{#if book.Вырезки}}
+        <div class="page-content">
+
+            {{#if book.Вырезки}}
 
             <div class="toolbar tabbar toolbar-top">
 
@@ -50,9 +70,7 @@
 
             </div>
 
-        {{/if}}
-
-        <div class="page-content">
+            {{/if}}
 
             {{#if book}}
 
@@ -81,8 +99,6 @@
                                             <div class="item-title">{{Название}}</div>
 
                                             <div class="item-after">
-
-                                                <span class="duration">{{Длительность}}</span>
 
                                                 <i class="icon f7-icons download">square_arrow_down</i>
                                                 <i class="icon f7-icons downloaded text-color-green display-none">checkmark_alt</i>
@@ -152,8 +168,6 @@
 
                                                                 <div class="item-after">
 
-                                                                    <span class="duration">{{Длительность}}</span>
-
                                                                     <i class="icon f7-icons download">square_arrow_down</i>
                                                                     <i class="icon f7-icons downloaded text-color-green display-none">checkmark_circle</i>
                                                                     <div class="gauge gauge-progress display-none"></div>
@@ -203,6 +217,15 @@
 </template>
 
 <style scoped>
+
+    {{this}} {
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
+
+    {{this}} .toolbar {
+        top: 35px !important;
+    }
 
     .icon {
 

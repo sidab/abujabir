@@ -30,8 +30,6 @@
 
         <div id="app">
 
-            <audio class="display-none"></audio>
-
             <div class="sheet-modal sheet-player">
 
                 <div class="preloader-block display-none">
@@ -93,8 +91,8 @@
 
                             <div class="col-20">
 
-                                <i onclick="audioEl.pause()" class="icon f7-icons display-none pause">pause_fill</i>
-                                <i onclick="audioEl.play()" class="icon f7-icons resume">play_fill</i>
+                                <i onclick="app.methods.player.toggle()" class="icon f7-icons display-none pause">pause_fill</i>
+                                <i onclick="app.methods.player.toggle()" class="icon f7-icons resume">play_fill</i>
 
                             </div>
 
@@ -146,8 +144,8 @@
 
                         <div class="col-30 controls">
 
-                            <i onclick="audioEl.play()" class="icon text-align-center material-icons resume">play_arrow</i>
-                            <i onclick="audioEl.pause()" class="icon text-align-center material-icons display-none pause">pause</i>
+                            <i onclick="app.methods.player.toggle()" class="icon text-align-center material-icons resume">play_arrow</i>
+                            <i onclick="app.methods.player.toggle()" class="icon text-align-center material-icons display-none pause">pause</i>
 
                         </div>
 
@@ -163,6 +161,7 @@
         <script src="js/fastclick.min.js"></script>
         <script src="js/framework7.min.js"></script>
         <script src="js/localforage.min.js" defer></script>
+        <script src="js/soundmanager.js" defer></script>
         <script src="js/routes.js" defer></script>
         <script src="js/app.js" defer></script>
 

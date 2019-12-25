@@ -7,7 +7,7 @@ routes = [
         path: '/book/:id',
         componentUrl: 'pages/books/book.html',
         options: {
-            transition: 'f7-circle'
+            transition: 'f7-dive'
         }
     }
 ]
