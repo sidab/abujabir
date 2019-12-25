@@ -61,12 +61,6 @@ var app = new Framework7({
 
           player.play();
 
-          setTimeout(function () {
-
-            //player.load();
-
-          }, sheetPlayer.opened ? 0 : 1000);
-
         });
 
       },
