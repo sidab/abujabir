@@ -521,7 +521,7 @@ $$(document).on('deviceready', function () {
     on: {
       change: function (range, value) {
 
-        if (change) {
+        if (typeof change !== 'undefined' && change) {
 
           var position = (range.value.toFixed(0).toString());
 
