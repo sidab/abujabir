@@ -19,7 +19,8 @@ var app = new Framework7({
     stackPages: true,
     preloadPreviousPage: false,
     removeElements: false,
-    iosSwipeBack: false
+    iosSwipeBack: true,
+    mdSwipeBack: true
   },
   dialog: {
     buttonCancel: 'Отмена',
@@ -518,7 +519,7 @@ $$(document).on('deviceready', function () {
 
     sheetPlayer.close();
 
-  });
+  }, 300);
 
   window.audioRange = app.range.create({
     el: sheetPlayer.$el.find('.range-audio'),
@@ -623,7 +624,7 @@ $$(document).on('deviceready', function () {
       sheetPlayer.$el.find('.sheet-modal-inner').removeClass('display-none');
       sheetPlayer.$el.find('.page-content').removeClass('disabled');
 
-      this.setPosition(0);
+      this.setPosition(latestTime);
 
       this.play();
 
@@ -744,21 +745,19 @@ $$(document).on('deviceready', function () {
     }
   });
 
+  latestTime = 0;
+
   if (localStorage.latest !== undefined) {
 
     var latest = JSON.parse(localStorage.latest);
+
+    latestTime = latest.time;
 
     app.methods.player.play(latest);
 
     setTimeout(function () {
 
       app.methods.player.play(latest);
-
-      setTimeout(function () {
-
-        player.setPosition(latest.time);
-
-      }, 500);
 
     }, 1000);
 
@@ -774,6 +773,6 @@ $$(document).on('deviceready', function () {
 
     navigator.splashscreen.hide();
 
-  }, 200);
+  }, 2500);
 
 });

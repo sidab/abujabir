@@ -2,7 +2,7 @@
 
     <div class="page">
 
-        <video autoplay muted loop id="video">
+        <video autoplay muted loop id="video" webkit-playsinline autobuffer playsinline controls>
 
             <source src="video/background.mov">
 
@@ -161,17 +161,19 @@
                 var app = component.$app;
                 var page = component.$el;
 
+                page.find('video')[0].play();
+
                 app.methods.books(false, function (books) {
 
                     component.books = books;
 
                     component.$update(function () {
 
-                        /*component.$router.navigate('/book/1', {
+                        component.$router.navigate('/book/1', {
                             context: {
                                 back: true
                             }
-                        });*/
+                        });
 
                         page.find('.book').on('click', function () {
 
