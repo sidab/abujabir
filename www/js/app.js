@@ -615,6 +615,7 @@ $$(document).on('deviceready', function () {
       sheetPlayer.$el.find('.page-content').removeClass('disabled');
 
       this.setPosition(latestTime);
+      audioRange.setValue(latestTime);
 
       if (latestTime > 0) {
 
@@ -635,8 +636,6 @@ $$(document).on('deviceready', function () {
             var currentTime = currentTimeMinutes + ':' + currentTimeSeconds;
 
             sheetPlayer.$el.find('.current-time').html(currentTime);
-
-            audioRange.setValue(latestTime);
 
             latestTime = 0;
 
@@ -817,6 +816,6 @@ $$(document).on('deviceready', function () {
 
     navigator.splashscreen.hide();
 
-  }, 4000);
+  }, 5000);
 
 });
