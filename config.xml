@@ -17,7 +17,6 @@
     <preference name="SplashScreenBackgroundColor" value="0xeeeeeeee" />
     <preference name="phonegap-version" value="cli-9.0.0" />
     <preference name="android-minSdkVersion" value="19" />
-    <preference name="xwalkMultipleApk" value="true" />
     <preference name="xwalk64bit" value="true" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#007aff" />
