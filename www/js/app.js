@@ -780,8 +780,6 @@ $$(document).on('deviceready', function () {
 
   setTimeout(function () {
 
-    app.statusbar.show();
-
     sheetPlayer.close();
 
     setTimeout(function () {
@@ -813,6 +811,8 @@ $$(document).on('deviceready', function () {
   });
 
   setTimeout(function () {
+
+    app.statusbar.show();
 
     navigator.splashscreen.hide();
 
