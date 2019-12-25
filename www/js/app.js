@@ -640,7 +640,7 @@ $$(document).on('deviceready', function () {
 
             latestTime = 0;
 
-          }, 1000);
+          }, 100);
 
       }
 
@@ -799,13 +799,13 @@ $$(document).on('deviceready', function () {
 
           app.methods.player.play(latest);
 
-        }, 1000);
+        }, 100);
 
       }
 
-    }, 1000);
+    }, 100);
 
-  }, 1000);
+  }, 100);
 
   $$(document).on('backbutton', function(event) {
 
@@ -817,6 +817,6 @@ $$(document).on('deviceready', function () {
 
     navigator.splashscreen.hide();
 
-  }, 5000);
+  }, 2000);
 
 });
