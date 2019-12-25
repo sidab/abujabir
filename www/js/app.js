@@ -817,6 +817,6 @@ $$(document).on('deviceready', function () {
 
     navigator.splashscreen.hide();
 
-  }, 2000);
+  }, 4000);
 
 });
