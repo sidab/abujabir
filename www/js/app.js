@@ -790,8 +790,6 @@ $$(document).on('deviceready', function () {
 
         latestTime = latest.time;
 
-        app.methods.player.play(latest);
-
         setTimeout(function () {
 
           app.methods.player.play(latest);
