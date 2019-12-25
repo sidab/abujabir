@@ -626,12 +626,12 @@ $$(document).on('deviceready', function () {
 
             player.pause();
 
-            var currentTimeMinutes = Math.floor((player.position / 1000) / 60).toLocaleString('en-US', {
+            var currentTimeMinutes = Math.floor((latestTime / 1000) / 60).toLocaleString('en-US', {
               minimumIntegerDigits: 2,
               useGrouping: false
             });
 
-            var currentTimeSeconds = (Math.floor(player.position / 1000) - currentTimeMinutes * 60).toLocaleString('en-US', {
+            var currentTimeSeconds = (Math.floor(latestTime / 1000) - currentTimeMinutes * 60).toLocaleString('en-US', {
               minimumIntegerDigits: 2,
               useGrouping: false
             });
