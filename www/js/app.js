@@ -628,6 +628,16 @@ $$(document).on('deviceready', function () {
 
       this.play();
 
+      if (latestTime > 0) {
+
+          setTimeout(function () {
+
+            player.pause();
+
+          }, 1000);
+
+      }
+
     },
     whileplaying: function () {
 
