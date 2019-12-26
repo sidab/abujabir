@@ -4,7 +4,7 @@ var app = new Framework7({
   root: '#app',
   name: 'Абу Джабир',
   theme: 'ios',
-  version: 7.8,
+  version: 7.9,
   routes: routes,
   backend: 'https://abujabir.ru/new/',
   touch: {
@@ -758,16 +758,6 @@ $$(document).on('deviceready', function () {
     }
   });
 
-  if (app.device.ios) {
-
-    setTimeout(function () {
-
-      app.statusbar.hide();
-
-    });
-
-  }
-
   latestTime = 0;
 
   sheetPlayer.open();
@@ -803,8 +793,6 @@ $$(document).on('deviceready', function () {
   });
 
   setTimeout(function () {
-
-    app.statusbar.show();
 
     navigator.splashscreen.hide();
 
