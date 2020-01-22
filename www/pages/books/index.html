@@ -94,6 +94,7 @@
         height: 50px;
     }
 
+
     .block-title-large {
         margin-top: 50px;
         font-family: 'SF UI Display';
@@ -169,12 +170,6 @@
                     component.books = books;
 
                     component.$update(function () {
-
-                        component.$router.navigate('/book/1', {
-                            context: {
-                                back: true
-                            }
-                        });
 
                         page.find('.book').on('click', function () {
 

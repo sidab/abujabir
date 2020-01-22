@@ -28,7 +28,8 @@
       "cordova-plugin-wkwebview-file-xhr": {},
       "cordova-plugin-background-audio": {},
       "cordova-plugin-background-mode": {},
-      "cordova-plugin-music-controls": {}
+      "cordova-plugin-music-controls": {},
+      "cordova-plugin-crosswalk-webview-arm": {}
     }
   },
   "dependencies": {

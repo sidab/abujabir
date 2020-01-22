@@ -4,20 +4,20 @@ var app = new Framework7({
   root: '#app',
   name: 'Абу Джабир',
   theme: 'ios',
-  version: 7.9,
+  version: 8.0,
   routes: routes,
   backend: 'https://abujabir.ru/new/',
   touch: {
     mdTouchRipple: false,
     tapHold: false,
     disableContextMenu: true,
-    activeState: false,
+    activeState: true,
     fastClicks: true
   },
   view: {
     iosDynamicNavbar: false,
     stackPages: true,
-    preloadPreviousPage: false,
+    preloadPreviousPage: true,
     removeElements: false,
     iosSwipeBack: true,
     mdSwipeBack: true
@@ -30,14 +30,7 @@ var app = new Framework7({
     player: {
       play: function (audio) {
 
-        sheetPlayer.$el.find('.preloader-block').removeClass('display-none');
-        sheetPlayer.$el.find('.page-content').addClass('disabled');
-
-        if(!sheetPlayer.opened) {
-
-          sheetPlayer.open();
-
-        }
+        app.dialog.preloader('Загрузка...');
 
         localStorage.latest = JSON.stringify(audio);
 
@@ -464,7 +457,7 @@ var app = new Framework7({
     }
   }
 
-});
+}).init();
 
 app.request.setup({
   beforeSend: function(xhr) {
@@ -479,13 +472,11 @@ app.request.setup({
 
 $$(document).on('deviceready', function () {
 
-  app.init();
-
   app.methods.checkVersion();
 
   app.views.create('.view-main', {
     url: '/books',
-    animate: app.device.ios ? true : false,
+    animate: false,
     main: true
   });
 
@@ -580,6 +571,14 @@ $$(document).on('deviceready', function () {
 
       sheetPlayer.$el.find('.duration').html(duration);
 
+      app.dialog.close();
+
+      if(!sheetPlayer.opened) {
+
+        sheetPlayer.open();
+
+      }
+
       sheetPlayer.$el.find('.share-button').off('click').on('click', function () {
 
         app.request({
@@ -604,9 +603,6 @@ $$(document).on('deviceready', function () {
         });
 
       });
-
-      sheetPlayer.$el.find('.preloader-block').addClass('display-none');
-      sheetPlayer.$el.find('.page-content').removeClass('disabled');
 
       this.setPosition(latestTime);
       audioRange.setValue(latestTime);
@@ -636,6 +632,26 @@ $$(document).on('deviceready', function () {
           }, 100);
 
       }
+
+      localforage.keys().then(function(keys) {
+
+        if (keys.indexOf(latest.url) == -1) {
+
+          var request = app.request({
+            url: encodeURI(app.params.backend + latest.url),
+            xhrFields: {
+              responseType: 'blob'
+            },
+            success: function (blob) {
+
+              localforage.setItem(latest.url, blob);
+
+            }
+          });
+
+        }
+
+      });
 
     },
     whileloading: function () {
@@ -760,31 +776,16 @@ $$(document).on('deviceready', function () {
 
   latestTime = 0;
 
-  sheetPlayer.open();
 
-  setTimeout(function () {
+  if (localStorage.latest !== undefined) {
 
-    sheetPlayer.close();
+    var latest = JSON.parse(localStorage.latest);
 
-    setTimeout(function () {
+    latestTime = latest.time;
 
-      if (localStorage.latest !== undefined) {
+      app.methods.player.play(latest);
 
-        var latest = JSON.parse(localStorage.latest);
-
-        latestTime = latest.time;
-
-        setTimeout(function () {
-
-          app.methods.player.play(latest);
-
-        }, 100);
-
-      }
-
-    }, 100);
-
-  }, 100);
+  }
 
   $$(document).on('backbutton', function(event) {
 
@@ -796,6 +797,6 @@ $$(document).on('deviceready', function () {
 
     navigator.splashscreen.hide();
 
-  }, 5000);
+  }, 2000);
 
 });
