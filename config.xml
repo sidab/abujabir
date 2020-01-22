@@ -82,6 +82,7 @@
     <plugin name="cordova-plugin-statusbar" spec="2.4.3" />
     <plugin name="cordova-plugin-x-socialsharing" spec="5.4.0" />
     <plugin name="cordova-plugin-crosswalk-webview-arm"/>
+    <plugin name="onesignal-cordova-plugin" spec="2.8.2" />
     <!--<plugin name="cordova-plugin-crosswalk-webview" spec="2.4.0" />
     <plugin name="cordova-build-architecture" spec="https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.4" />
     <preference name="buildArchitecture" value="arm64" />-->

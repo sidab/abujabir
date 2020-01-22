@@ -42,6 +42,9 @@
     },
     "cordova-plugin-music-controls": {
       "PACKAGE_NAME": "com.abujabir.ml"
+    },
+    "onesignal-cordova-plugin": {
+      "PACKAGE_NAME": "com.abujabir.ml"
     }
   },
   "dependent_plugins": {

@@ -20,7 +20,11 @@ var app = new Framework7({
     preloadPreviousPage: true,
     removeElements: false,
     iosSwipeBack: true,
-    mdSwipeBack: true
+    mdSwipeBack: true,
+    iosSwipeBackAnimateShadow: false,
+    iosSwipeBackAnimateOpacity: false,
+    mdSwipeBackAnimateShadow: false,
+    mdSwipeBackAnimateOpacity: false
   },
   dialog: {
     buttonCancel: 'Отмена',
@@ -449,6 +453,19 @@ var app = new Framework7({
         }
       });
 
+    },
+    onesignal: function () {
+
+      try {
+
+        window.plugins.OneSignal.startInit('27c4ee8a-8c07-454c-92ef-ed4a616b75a6').endInit();
+
+      } catch (error) {
+
+        console.log(error);
+
+      }
+
     }
   },
   on: {
@@ -473,6 +490,8 @@ app.request.setup({
 $$(document).on('deviceready', function () {
 
   app.methods.checkVersion();
+
+  app.methods.onesignal();
 
   app.views.create('.view-main', {
     url: '/books',

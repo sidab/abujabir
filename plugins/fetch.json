@@ -119,6 +119,20 @@
       "id": "cordova-plugin-crosswalk-webview-arm@3.1.0"
     },
     "is_top_level": true,
+    "variables": {
+      "XWALK_VERSION": "23+",
+      "XWALK_LITEVERSION": "xwalk_core_library_canary:17+",
+      "XWALK_COMMANDLINE": "--disable-pull-to-refresh-effect",
+      "XWALK_MODE": "embedded",
+      "XWALK_MULTIPLEAPK": "true"
+    }
+  },
+  "onesignal-cordova-plugin": {
+    "source": {
+      "type": "registry",
+      "id": "onesignal-cordova-plugin@2.8.2"
+    },
+    "is_top_level": true,
     "variables": {}
   }
 }
